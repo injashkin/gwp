@@ -1,44 +1,46 @@
-# Adding a blog to your homepage starter
+# Добавление блога на домашнюю страницу стартера
 
-The Gatsby Homepage starter includes components for creating a homepage and an _About_ page as well as templates for simple pages like a _Privacy Policy_ page.
+Стартер Gatsby Homepage включает компоненты для создания домашней страницы и страницы _About_, а также шаблоны для простых страниц, таких как страница _Privacy Policy_.
 
-It does not include a blog by default, but you can install an optional theme to source blog content from a CMS of your choice.
+По умолчанию стартер не имеет блога, но можно установить дополнительную тему и тогда можно получать контент блога из CMS.
 
 ## Get started
 
-The content for the blog pages is sourced by a [Gatsby Theme][], which you'll need to install in your site.
+Контент для страниц блога создается с помощью [Gatsby Theme][], которую вам нужно будет установить на свой сайт.
 
 [gatsby theme]: https://www.gatsbyjs.com/docs/themes/
 
-This homepage starter uses WordPress for its content, but you can choose a different CMS for your blog.
-For example, if you've decided to switch to WordPress, but you have an existing blog in a different CMS and want to keep the content separate, you can install the blog theme for that CMS.
+Эта начальная страница использует WordPress для своего контента, но вы можете выбрать другую CMS для своего блога.
+Например, если вы решили перейти на WordPress, но у вас есть существующий блог на другой CMS и вы хотите сохранить контент отдельно, вы можете установить тему блога для этой CMS.
 
-Currently, the following blog themes are available to work out-of-the-box with this starter:
+В настоящее время для работы с этим стартером доступны следующие темы блога "из коробки":
 
 - [gatsby-theme-contentful-blog][]
 - [gatsby-theme-datocms-blog][]
 - [gatsby-theme-wordpress-blog][]
 
-Choose one of these blog themes, install it, and add it to your site's `gatsby-config.js`.
+Выберите одну из этих тем блога и установите ее:
 
 ```sh name
 npm i gatsby-theme-wordpress-blog
 ```
+
+Затем, добавьте тему в файл `gatsby-config.js`.
 
 ```js name
 // gatsby-config.js
 module.exports = {
   plugins: [
     // ...
-    // Add the theme to the plugins array
+    // Добавьте тему в массив плагинов
     "gatsby-theme-wordpress-blog",
   ],
 }
 ```
 
-### Add content to WordPress
+### Добавление контента в WordPress
 
-In your WordPress Admin, create and publish blog posts then navigate to `/blog` in your site to view them.
+В админ панели WordPress создайте и опубликуйте записи в блоге, затем перейдите по адресу `https://Ваш_сайт/blog`, где будет список статей блога.
 
 ### Environment Variables
 
@@ -53,9 +55,9 @@ If you're using a different CMS in your blog than the one used for the homepage 
   - `DATOCMS_API_TOKEN`
   - `DATOCMS_ENVIRONMENT`
 
-## Adding templates
+## Добавление шаблонов
 
-These blog themes do not render pages by default. Once a blog theme is added to your site and configured, create two templates in your site to render the blog index page and blog post pages. You will need to add a `src/templates/blog-index.js` file and `src/templates/blog-post.js` file.
+Эти темы блога по умолчанию не отображают страницы. Как только тема блога будет добавлена на ваш сайт и настроена, создайте на своем сайте два шаблона для отображения страницы индекса блога и страниц записей в блоге. Вам нужно будет добавить файлы `src/templates/blog-index.js` и `src/templates/blog-post.js`.
 
 ```js
 // example src/templates/blog-index.js
