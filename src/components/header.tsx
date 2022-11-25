@@ -1,4 +1,5 @@
 import * as React from "react"
+import { graphql } from "gatsby"
 import { Menu, X } from "react-feather"
 import {
   Container,
@@ -10,6 +11,7 @@ import {
   InteractiveIcon,
   Nudge,
   VisuallyHidden,
+  NavItem,
 } from "./ui"
 import {
   mobileNavOverlay,
@@ -20,6 +22,7 @@ import {
 } from "./header.css"
 import BrandLogo from "./brand-logo"
 import NavItemGroup, { NavItemGroupNavItem } from "./nav-item-group"
+import { text } from "./404.css"
 
 type NavItem = {
   id: string
@@ -78,7 +81,7 @@ const data: HeaderData = {
   },
 }
 
-export default function Header() {
+export default function Header(props) {
   const { navItems, cta } = data
   const [isOpen, setOpen] = React.useState(false)
 
@@ -101,14 +104,25 @@ export default function Header() {
           </NavLink>
           <nav>
             <FlexList gap={4}>
-              {navItems &&
-                navItems.map((navItem) => (
-                  <li key={navItem.id}>
-                    <NavLink to={navItem.href}>{navItem.text}</NavLink>
-                  </li>
-                ))}
+              {props.data.allWpMenuItem.nodes.map(
+                (node) =>
+                  node.parentId === null &&
+                  (node.childItems.nodes.length === 0 ? (
+                    <li key={node.id}>
+                      <NavLink to={node.uri}>{node.label}</NavLink>
+                    </li>
+                  ) : (
+                    node.childItems.nodes.length > 0 && (
+                      <NavItemGroup
+                        name={node.label}
+                        navItems={[]}
+                      ></NavItemGroup>
+                    )
+                  ))
+              )}
             </FlexList>
           </nav>
+
           <div>{cta && <Button to={cta.href}>{cta.text}</Button>}</div>
         </Flex>
       </Container>
@@ -152,10 +166,10 @@ export default function Header() {
         <div className={mobileNavOverlay}>
           <nav>
             <FlexList responsive variant="stretch">
-              {navItems?.map((navItem) => (
-                <li key={navItem.id}>
-                  <NavLink to={navItem.href} className={mobileNavLink}>
-                    {navItem.text}
+              {props.data.allWpMenuItem.nodes?.map((node) => (
+                <li key={node.id}>
+                  <NavLink to={node.id} className={mobileNavLink}>
+                    {node.label}
                   </NavLink>
                 </li>
               ))}
@@ -166,3 +180,31 @@ export default function Header() {
     </header>
   )
 }
+
+export const query = graphql`
+  {
+    allWpMenuItem {
+      nodes {
+        id
+        uri
+        url
+        label
+        description
+        parentId
+        childItems {
+          nodes {
+            childItems {
+              nodes {
+                id
+                uri
+                url
+                label
+                description
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
