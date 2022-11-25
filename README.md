@@ -148,31 +148,32 @@ If you prefer to use an image, use the [`StaticImage`](https://www.gatsbyjs.com/
 
 ![Headings & Buttons](./docs/images/headings-buttons.png)
 
-To further customize the look and feel of the homepage, edit the UI components in `src/components/ui.tsx` and styles in `src/components/ui.css.ts`.
+Чтобы дополнительно настроить внешний вид домашней страницы, отредактируйте UI компоненты в `src/components/ui.tsx` и стили в `src/components/ui.css.ts`.
 
-### Customize section components
+### Настройка компонентов раздела
 
-To customize any of the sections of the homepage, edit the relevant component in `src/components`.
-Most of the styles for these components are handled with shared UI components in `src/components/ui.tsx`.
+Чтобы настроить любой раздел домашней страницы, отредактируйте соответствующий компонент в `src/components`. Большинство стилей для этих компонентов обрабатываются с помощью общих UI компонентов в `src/components/ui.tsx`.
 
-### Create custom section components
+### Создание пользовательских компонентов раздела
 
-To create a new type of section in your homepage, you'll want to create a new section component, using the existing components as an example.
-For this example, we'll create a new "Banner" component.
+Чтобы создать новый тип раздела на домашней странице, вам потребуется создать новый компонент раздела, используя существующие компоненты в качестве примера. Для этого примера мы создадим новый компонент "Banner".
 
-1. First, update your custom fields in WordPress to support the new component
+1. Сначала, для поддержки нового компонента создайте свои пользовательские поля в WordPress, для этого сделайте следующее:
 
-   Under the _Custom Fields_ tab, create a new _Field Group_ and call it "Homepage Banner."
-   For this example, add two text fields: `banner_heading` and `banner_text`.
-   In the _Location_ rules, be sure to show the field group in _Page_ post types.
-   Also ensure that the _Show in GraphQL_ option is enabled for this field.
+   На вкладке _Custom Fields_ создайте новую группу полей с помощью кнопки _+Add New_.
+   В поле _Add New Field Group_ введите имя "Homepage Banner" для этой группы полей.
+   В поле _Field Name_ введите `banner_heading`.
+   Добавьте ещё одно поле с помощью кнопки _+ Add Field_.
+   В поле _Field Name_ введите `banner_text`.
+   Во вкладке _Location Rules_ секции Settings для _Post Type_ обязательно укажите _Page_.
+   Также убедитесь, что для этой группы включена опция _Show in GraphQL_.
+   В правом верхнем углу нажмите кнопку _Save Changes_.
 
-   Navigate to the _Pages_ tab and edit the Homepage and add content for the new Banner component.
+   Перейдите на вкладку _Pages_, в самом низу отредактируйте два поля в Homepage Banner.
 
-1. Update `gatsby-node.js`
+2. Обновите `gatsby-node.js`
 
-   Edit your site's `gatsby-node.js` file, adding a type for `HomepageBanner` that matches your custom fields in WordPress.
-   This allows the homepage to query the abstract `HomepageBanner` type.
+   Отредактируйте файл `gatsby-node.js` сайта, добавив тип `HomepageBanner`, который соответствует вашим пользовательским полям в WordPress. Это позволяет домашней странице запрашивать абстрактный тип `HomepageBanner`.
 
    ```js
    // in gatsby-node.js
@@ -254,7 +255,7 @@ For this example, we'll create a new "Banner" component.
    }
    ```
 
-1. Next, create the Banner component:
+3. Next, create the Banner component:
 
    ```jsx fileExt
    // src/components/banner.tsx
@@ -282,7 +283,7 @@ For this example, we'll create a new "Banner" component.
    `
    ```
 
-1. Export the component from `src/components/sections.tsx`
+4. Export the component from `src/components/sections.tsx`
 
    ```js fileExt
    // src/components/sections.tsx
@@ -300,7 +301,7 @@ For this example, we'll create a new "Banner" component.
    export { default as HomepageBanner } from "./banner"
    ```
 
-1. Add the GraphQL query fragment to the query in `src/pages/index.tsx`
+5. Add the GraphQL query fragment to the query in `src/pages/index.tsx`
 
    ```js fileExt
    // in src/pages/index.tsx
@@ -334,11 +335,11 @@ For this example, we'll create a new "Banner" component.
    `
    ```
 
-## Troubleshooting
+## Устранение неполадок
 
-### Errors after making changes to the schema
+### Ошибки после внесения изменений в схему
 
-If you've made changes to the `gatsby-node.js` file or changes to the WordPress data model, clear the Gatsby cache before running the develop server:
+Если вы внесли изменения в файл `gatsby-node.js` или внесли изменения в модель данных WordPress, то очистите кэш Gatsby перед запуском сервера разработки:
 
 ```sh
 yarn clean && yarn start
