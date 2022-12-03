@@ -28,25 +28,43 @@ export default function Hero(props: HeroProps) {
   return (
     <Section>
       <Container>
-        <Flex gap={4} variant="responsive">
-          <Box width="half">
-            {props.image && (
-              <GatsbyImage
-                alt={props.image.alt}
-                image={getImage(props.image.gatsbyImageData)}
-              />
-            )}
-          </Box>
-          <Box width="half">
+        {/* <Flex gap={4} variant="end"> */}
+        {/* <Box width="full"> */}
+        <div style={{ display: "grid" }}>
+          {props.image && (
+            <GatsbyImage
+              alt={props.image.alt}
+              image={getImage(props.image.gatsbyImageData)}
+              style={{
+                gridArea: "1/1",
+                maxHeight: 700,
+              }}
+            />
+          )}
+          <div
+            style={{
+              // Используя одну и ту же область сетки элементы укладываются друг на друга
+              gridArea: "1/1",
+              position: "relative",
+
+              placeItems: "end center",
+              display: "grid",
+              gridTemplateRows: "38% 1fr 1fr 1fr 25%",
+            }}
+          >
+            <div></div>
             <Heading as="h1">
               {props.kicker && <Kicker>{props.kicker}</Kicker>}
               {props.h1}
             </Heading>
-            <Subhead as="h2">{props.subhead}</Subhead>
+            {/* <Subhead as="h2">{props.subhead}</Subhead> */}
             <Text as="p">{props.text}</Text>
-            <ButtonList links={props.links} />
-          </Box>
-        </Flex>
+
+            <ButtonList links={props.links} variant={"center"} />
+          </div>
+        </div>
+        {/* </Box> */}
+        {/* </Flex> */}
       </Container>
     </Section>
   )
