@@ -3,7 +3,10 @@ import { theme } from "../theme.css"
 import { media } from "./ui.css"
 
 export const desktopHeaderNavWrapper = style({
-  position: "relative",
+  position: "absolute",
+  left: "50%",
+  transform: "translate(-50%)",
+  width: "100%",
   zIndex: 1,
   display: "none",
   "@media": {
