@@ -471,7 +471,7 @@ const button = style({
   paddingBottom: theme.space[3],
   paddingLeft: theme.space[3],
   paddingRight: theme.space[3],
-  borderRadius: theme.radii.button,
+  borderRadius: theme.radii.circle,
 })
 
 export type ButtonVariants = "primary" | "reversed" | "link" | "linkReversed"
