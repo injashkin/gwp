@@ -2,12 +2,15 @@ import { style, styleVariants } from "@vanilla-extract/css"
 import { calc } from "@vanilla-extract/css-utils"
 import { theme } from "../theme.css"
 
-const breakpoints = ["40em", "52em", "64em"]
+const breakpoints = ["30em", "40em", "52em", "64em", "75em", "88em"]
 
 export const media = {
-  small: `screen and (min-width: ${breakpoints[0]})`,
-  medium: `screen and (min-width: ${breakpoints[1]})`,
-  large: `screen and (min-width: ${breakpoints[2]})`,
+  tiny: `screen and (min-width: ${breakpoints[0]})`,
+  small: `screen and (min-width: ${breakpoints[1]})`,
+  medium: `screen and (min-width: ${breakpoints[2]})`,
+  large: `screen and (min-width: ${breakpoints[3]})`,
+  xl: `screen and (min-width: ${breakpoints[4]})`,
+  xxl: `screen and (min-width: ${breakpoints[5]})`,
 }
 
 export const container = style({
