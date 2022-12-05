@@ -14,6 +14,7 @@ import {
   Subhead,
   Text,
 } from "./ui"
+import { desktopHeroTopLayer, desktopHeroBottomLayer, grid } from "./hero.css"
 
 export interface HeroProps {
   image?: HomepageImage
@@ -31,28 +32,15 @@ export default function Hero(props: HeroProps) {
       {/* <Container> */}
       {/* <Flex gap={4} variant="end"> */}
       {/* <Box width="full"> */}
-      <div style={{ display: "grid" }}>
+      <div className={grid}>
         {props.image && (
           <GatsbyImage
             alt={props.image.alt}
             image={getImage(props.image.gatsbyImageData)}
-            style={{
-              gridArea: "1/1",
-              maxHeight: 700,
-            }}
+            className={desktopHeroBottomLayer}
           />
         )}
-        <div
-          style={{
-            // Используя одну и ту же область сетки элементы укладываются друг на друга
-            gridArea: "1/1",
-            position: "relative",
-
-            placeItems: "end center",
-            display: "grid",
-            gridTemplateRows: "38% 1fr 1fr 1fr 25%",
-          }}
-        >
+        <div className={desktopHeroTopLayer}>
           <div></div>
           <Heading as="h1">
             {props.kicker && <Kicker>{props.kicker}</Kicker>}
