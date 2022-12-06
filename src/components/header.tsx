@@ -115,7 +115,7 @@ export default function Header(props) {
                     node.childItems.nodes.length > 0 && (
                       <NavItemGroup
                         name={node.label}
-                        navItems={[]}
+                        navItems={props.data.allWpMenuItem.nodes}
                       ></NavItemGroup>
                     )
                   ))
@@ -134,32 +134,31 @@ export default function Header(props) {
               mobileNavSVGColorWrapper[isOpen ? "reversed" : "primary"]
             }
           >
+            <Space />
+            <InteractiveIcon
+              title="Toggle menu"
+              onClick={() => setOpen(!isOpen)}
+              className={
+                mobileNavSVGColorWrapper[isOpen ? "reversed" : "primary"]
+              }
+            >
+              {isOpen ? <X /> : <Menu />}
+            </InteractiveIcon>
+          </span>
+
+          <Nudge right={3}>
             <NavLink to="/">
               <VisuallyHidden>Home</VisuallyHidden>
               <BrandLogo />
             </NavLink>
-          </span>
-          <Flex>
-            <Space />
-            <div>
-              {cta && (
-                <Button to={cta.href} variant={isOpen ? "reversed" : "primary"}>
-                  {cta.text}
-                </Button>
-              )}
-            </div>
-            <Nudge right={3}>
-              <InteractiveIcon
-                title="Toggle menu"
-                onClick={() => setOpen(!isOpen)}
-                className={
-                  mobileNavSVGColorWrapper[isOpen ? "reversed" : "primary"]
-                }
-              >
-                {isOpen ? <X /> : <Menu />}
-              </InteractiveIcon>
-            </Nudge>
-          </Flex>
+          </Nudge>
+          <div>
+            {cta && (
+              <Button to={cta.href} variant={isOpen ? "reversed" : "primary"}>
+                {cta.text}
+              </Button>
+            )}
+          </div>
         </Flex>
       </Container>
       {isOpen && (
@@ -189,19 +188,14 @@ export const query = graphql`
         uri
         url
         label
-        description
         parentId
         childItems {
           nodes {
-            childItems {
-              nodes {
-                id
-                uri
-                url
-                label
-                description
-              }
-            }
+            id
+            uri
+            url
+            label
+            description
           }
         }
       }
