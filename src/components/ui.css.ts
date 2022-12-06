@@ -117,7 +117,7 @@ export const flexVariants: Record<FlexVariants, string> = styleVariants({
   responsive: {
     flexDirection: "column",
     "@media": {
-      [media.small]: {
+      [media.medium]: {
         flexDirection: "row",
       },
     },
@@ -147,7 +147,7 @@ export const widths: Record<Widths, string> = styleVariants(
     {
       width: "100%",
       "@media": {
-        [media.small]: {
+        [media.medium]: {
           width,
         },
       },
@@ -182,7 +182,7 @@ export const radii = styleVariants(theme.radii, (borderRadius) => ({
 }))
 export const order = styleVariants({ 0: 0, 1: 1, 2: 2, 3: 3 }, (order) => ({
   "@media": {
-    [media.small]: {
+    [media.medium]: {
       order,
     },
   },
@@ -200,7 +200,7 @@ export const section = style({
   paddingTop: theme.space[4],
   paddingBottom: theme.space[4],
   "@media": {
-    [media.small]: {
+    [media.medium]: {
       paddingTop: theme.space[5],
       paddingBottom: theme.space[5],
     },
@@ -298,7 +298,7 @@ export const text: Record<TextVariants, string> = styleVariants({
       lineHeight: theme.lineHeights.heading,
       letterSpacing: theme.letterSpacings.tight,
       "@media": {
-        [media.small]: {
+        [media.medium]: {
           fontSize: theme.fontSizes[7],
         },
       },

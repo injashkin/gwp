@@ -13,7 +13,7 @@ export const aboutHeroText = style({
   marginBottom: theme.space[5],
   maxWidth: "798px",
   "@media": {
-    [media.small]: {
+    [media.medium]: {
       fontSize: theme.fontSizes[4],
     },
   },

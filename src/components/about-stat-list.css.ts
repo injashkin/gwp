@@ -4,7 +4,7 @@ import { media } from "./ui.css"
 
 export const statList = style({
   "@media": {
-    [media.small]: {
+    [media.medium]: {
       gap: theme.space[6],
     },
   },
@@ -15,7 +15,7 @@ export const statContainer = style({
   flexDirection: "column",
   alignItems: "center",
   "@media": {
-    [media.small]: {
+    [media.medium]: {
       alignItems: "flex-start",
     },
   },
