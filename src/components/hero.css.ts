@@ -20,7 +20,7 @@ export const desktopHeroTopLayer = style({
   gridArea: "1/1",
   position: "relative",
 
-  placeItems: "end center",
+  placeItems: "center",
   display: "grid",
-  gridTemplateRows: "38% 1fr 1fr 1fr 25%",
+  // gridTemplateRows: "38% 1fr 1fr 1fr 25%",
 })

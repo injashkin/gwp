@@ -41,15 +41,19 @@ export default function Hero(props: HeroProps) {
           />
         )}
         <div className={desktopHeroTopLayer}>
-          <div></div>
-          <Heading as="h1">
-            {props.kicker && <Kicker>{props.kicker}</Kicker>}
-            {props.h1}
-          </Heading>
-          {/* <Subhead as="h2">{props.subhead}</Subhead> */}
-          <Text as="p">{props.text}</Text>
+          <div>
+            <Heading as="h1" center>
+              {props.kicker && <Kicker>{props.kicker}</Kicker>}
+              {props.h1}
+            </Heading>
 
-          <ButtonList links={props.links} variant={"center"} />
+            {/* <Subhead as="h2">{props.subhead}</Subhead> */}
+            <Text as="p" center>
+              {props.text}
+            </Text>
+
+            <ButtonList links={props.links} variant={"center"} />
+          </div>
         </div>
       </div>
       {/* </Box> */}
