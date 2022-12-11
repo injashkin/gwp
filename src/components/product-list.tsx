@@ -1,5 +1,6 @@
 import * as React from "react"
 import { graphql } from "gatsby"
+import { widthsMy } from "./product-list.css"
 import {
   Container,
   Section,
@@ -15,6 +16,8 @@ import {
   HomepageLink,
 } from "./ui"
 
+import { GatsbyImage } from "gatsby-plugin-image"
+
 interface ProductProps {
   id: string
   image: HomepageImage
@@ -25,12 +28,12 @@ interface ProductProps {
 
 function Product(props: ProductProps) {
   return (
-    <Box center>
+    <Box>
       {props.image && (
-        <Icon
+        // <Icon alt={props.image.alt} image={props.image.gatsbyImageData} size="large" />
+        <GatsbyImage
           alt={props.image.alt}
           image={props.image.gatsbyImageData}
-          size="large"
         />
       )}
       <Subhead>{props.heading}</Subhead>
@@ -58,9 +61,9 @@ export default function ProductList(props: ProductListProps) {
           </Heading>
           {props.text && <Text>{props.text}</Text>}
         </Box>
-        <FlexList gap={4} variant="responsive">
+        <FlexList gap={3} variant="center">
           {props.content.map((product) => (
-            <li key={product.id}>
+            <li key={product.id} className={widthsMy}>
               <Product {...product} />
             </li>
           ))}
