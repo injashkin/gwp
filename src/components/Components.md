@@ -29,7 +29,18 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 
 Свойства для компонента Flex:
 
-- `variant` - Можно задавать те же значения, что и для justify-content в css: `"stretch" | "center" | "end" | "start" | "baseline" | "column" | "wrap" | "columnStart" | "spaceBetween" | "responsive"`.
+- `variant` - Можно задавать следующие значения (через дефис указано, чему соответствует в CSS):
+
+  - `"stretch"` - alignItems: "stretch"
+  - `"center"` - width: "100%", flexWrap: "wrap", justifyContent: "center",
+  - `"end"` - alignItems: "flex-end"
+  - `"start"` - alignItems: "flex-start"
+  - `"baseline"` - align-items: "flex-start"
+  - `"column"` - flexDirection: "column"
+  - `"wrap"` - flex-wrap: "wrap"
+  - `"columnStart"` - flexDirection: "column", alignItems: "flex-start",
+  - `"spaceBetween"` - width: "100%", flexWrap: "wrap", justifyContent: "space-between",
+  - `"responsive"` - для мобильных flexDirection: "column", для десктопов flexDirection: "row",1
 
 - `gap` - Аналогично column-gap для flex в css. Принимает значения `0 | 1 | 2 | 3 | 4 | 5 | 6`, что соответствует `0 | 4px | 8px | 16px | 32px | 64px | 128px`.
 
@@ -59,8 +70,8 @@ fullbleed - то же, что и normal плюс удвоенные падинг
   - "center" - по центру
   - "bold" - жирный
   - "lead" - размер 18px, с увеличенным межстрочным интервалом
-  - "superHeading" - обычно для стилизации h1, размер 32px, нижний отступ 128px
-  - "heading" - обычно для стилизации h2, размер 32px
+  - "superHeading" - обычно для стилизации h1, размер 48px, нижний отступ 128px
+  - "heading" - обычно для стилизации h2, размер 48px
   - "subhead" - обычно для стилизации h3, размер 32px
   - "subheadSmall" - обычно для подзаголовков h2, h3, размер 24px
   - "kicker" - размер 14px, все буквы заглавные
@@ -96,3 +107,19 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 Компонентам <SuperHeading>, <Heading>, <Subhead> и <Kicker> можно задавать те же свойства что и компоненту <Text>.
 
 ---
+
+## GatsbyImage
+
+Является компонентом плагина [gatsby-plugin-image](https://www.gatsbyjs.com/plugins/gatsby-plugin-image/).
+
+<GatsbyImage alt={props.image.alt} image={getImage(props.image.gatsbyImageData)} className={desktopHeroBottomLayer} />
+
+## Avatar, Logo, Icon
+
+<Icon alt={props.image.alt} image={props.image.gatsbyImageData} size="large" />
+
+С помощью этих компонентов можно создавать аватары, логотипы, иконки. Компоненты используют компонент GatsbyImage плагина gatsby-plugin-image.
+
+- alt -
+- image -
+- size - можно задать "small" | "medium" | "large", что соответствует "24px" | "32px" | "64px"
