@@ -15,6 +15,7 @@ import {
 } from "../components/ui"
 import { BlogAuthor, BlogPost } from "./blog-post"
 import SEOHead from "../components/head"
+
 interface PostCardSmallProps {
   slug: string
   image?: HomepageImage
@@ -110,6 +111,7 @@ export default function BlogIndex({ posts }: BlogIndexProps) {
                 <PostCardSmall {...post} />
               </Box>
             ))}
+            <div>{posts.length.toString()}</div>
           </FlexList>
         </Box>
       </Container>

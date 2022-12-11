@@ -35,6 +35,7 @@
     "typescript": "^4.6.2"
   },
   "scripts": {
+    "dev": "gatsby clean && gatsby develop",
     "start": "gatsby develop",
     "develop": "gatsby develop",
     "build": "gatsby build",

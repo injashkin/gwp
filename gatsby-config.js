@@ -22,7 +22,13 @@ module.exports = {
     "gatsby-plugin-image",
     "gatsby-transformer-sharp",
     "gatsby-plugin-vanilla-extract",
-    "gatsby-theme-wordpress-blog",
+    {
+      resolve: "gatsby-theme-wordpress-blog",
+      options: {
+        postPath: "src/templates/blog-post",
+        indexPath: "src/templates/blog-index",
+      },
+    },
     {
       resolve: "gatsby-plugin-manifest",
       options: {

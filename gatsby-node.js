@@ -344,6 +344,8 @@ exports.onCreateNode = ({
             productList.product1,
             productList.product2,
             productList.product3,
+            productList.product4,
+            productList.product5,
           ]
             .filter(Boolean)
             .map(createItemNode(node, "HomepageProduct")),

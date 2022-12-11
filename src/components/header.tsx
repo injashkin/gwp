@@ -127,7 +127,7 @@ export default function Header(props) {
         </Flex>
       </Container>
       <Container className={mobileHeaderNavWrapper[isOpen ? "open" : "closed"]}>
-        <Space size={2} />
+        <Space size={1} />
         <Flex variant="spaceBetween">
           <span
             className={
