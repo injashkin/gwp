@@ -123,3 +123,30 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 - alt -
 - image -
 - size - можно задать "small" | "medium" | "large", что соответствует "24px" | "32px" | "64px"
+
+---
+
+## Box
+
+<Box center paddingY={5}></Box>
+<Box as="p"></Box>
+
+- as - Устанавливает тег элемента.
+
+- width - По умолчанию "full". Принимает значения
+  "full" | "half" | "quarter" | "third" | "twothirds" | "fitContent",
+  что соответствует  
+   100% | 50% | 25% | 33.3333% | 33.3333% | fit-content
+
+- background,
+- padding,
+
+- paddingY - Устанавливает внутренние отступы сверху и снизу.
+  Принимает значения
+  0 | 1 | 2 | 3 | 4 | 5 | 6,
+  что соответствует
+  0 | 4px | 8px |16px | 32px | 64px | 128px
+
+- radius,
+- center = false,
+- order - 0 | 1 | 2 | 3
