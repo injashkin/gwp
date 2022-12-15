@@ -101,6 +101,7 @@ interface BoxProps extends BaseProps {
   paddingY?: SpaceTokens
   radius?: Radii
   center?: boolean
+  border?: boolean
   order?: 0 | 1 | 2 | 3
 }
 
@@ -111,6 +112,7 @@ export function Box({
   paddingY,
   radius,
   center = false,
+  border,
   order,
   cx: _cx = [],
   ...props
@@ -124,6 +126,7 @@ export function Box({
         paddingY && styles.paddingY[paddingY],
         radius && styles.radii[radius],
         center && styles.box.center,
+        border && styles.border.border,
         order && styles.order[order],
         ..._cx,
       ]}
