@@ -356,7 +356,7 @@ exports.onCreateNode = ({
           ]
             .filter(Boolean)
             .map(createItemNode(node, "HomepageBenefit")),
-          stats: [statList.stat1, statList.stat2, statList.stat3]
+          stats: [statList.stat1, statList.stat2, statList.stat3, statList.stat4, statList.stat5]
             .filter(Boolean)
             .map(createItemNode(node, "HomepageStat")),
           testimonials: [

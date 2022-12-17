@@ -1,6 +1,6 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import { widthsMy } from "./product-list.css"
+import { widthProduct } from "./product-list.css"
 import {
   Container,
   Section,
@@ -10,6 +10,7 @@ import {
   Heading,
   Subhead,
   Box,
+  Button,
   Icon,
   LinkList,
   HomepageImage,
@@ -17,18 +18,20 @@ import {
 } from "./ui"
 
 import { GatsbyImage } from "gatsby-plugin-image"
+import { text } from "./404.css"
 
 interface ProductProps {
   id: string
   image: HomepageImage
   heading: string
   text: string
+  link: string
   links: HomepageLink[]
 }
 
 function Product(props: ProductProps) {
   return (
-    <Box>
+    <Box border center radius="button">
       {props.image && (
         // <Icon alt={props.image.alt} image={props.image.gatsbyImageData} size="large" />
         <GatsbyImage
@@ -36,9 +39,12 @@ function Product(props: ProductProps) {
           image={props.image.gatsbyImageData}
         />
       )}
-      <Subhead>{props.heading}</Subhead>
-      <Text>{props.text}</Text>
-      <LinkList links={props.links} />
+      <Box padding={3}>
+        <Subhead>{props.heading}</Subhead>
+        <Text>{props.text}</Text>
+        <LinkList links={props.links} />
+        <Button>"iuyhkjhkjh"</Button>
+      </Box>
     </Box>
   )
 }
@@ -61,9 +67,9 @@ export default function ProductList(props: ProductListProps) {
           </Heading>
           {props.text && <Text>{props.text}</Text>}
         </Box>
-        <FlexList gap={3} variant="center">
+        <FlexList gap={5} variant="center">
           {props.content.map((product) => (
-            <li key={product.id} className={widthsMy}>
+            <li key={product.id} className={widthProduct}>
               <Product {...product} />
             </li>
           ))}

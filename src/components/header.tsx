@@ -11,7 +11,6 @@ import {
   InteractiveIcon,
   Nudge,
   VisuallyHidden,
-  NavItem,
 } from "./ui"
 import {
   mobileNavOverlay,

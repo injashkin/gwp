@@ -1,7 +1,6 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import { parallax, parallaxText, parallaxImage } from "./stat-list.css"
 import {
   Container,
   Section,
@@ -16,6 +15,7 @@ import {
   Nudge,
   HomepageImage,
   HomepageLink,
+  Parallax,
 } from "./ui"
 
 interface StatProps {
@@ -66,29 +66,20 @@ export default function StatList(props: StatListProps) {
                 ))}
               </FlexList>
               <ButtonList links={props.links} reversed />
-              <Box>
-                {"sd"}
-              </Box>
+              <Box>{"sd"}</Box>
             </Box>
-
           </Flex>
         </Section>
       </Container>
       <Box width="full">
         {props.image && (
           <Nudge right={5} bottom={5}>
-            <Box className={parallax}>
-              <Box className={parallaxImage}>
-                <GatsbyImage
-                  alt={props.image.alt}
-                  image={getImage(props.image.gatsbyImageData)}
-                />
-              </Box>
-  
-              <Box className={parallaxText}>{"Паралакс"}</Box>
-              
-            </Box>
-        </Nudge>
+            <Parallax
+              alt={props.image.alt}
+              image={props.image.gatsbyImageData}
+              text={"Паралакс"}
+            />
+          </Nudge>
         )}
       </Box>
     </div>
