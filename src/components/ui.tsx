@@ -373,3 +373,18 @@ export function VisuallyHidden(props) {
 export function BlockLink(props) {
   return <Link className={styles.blockLink} {...props} />
 }
+
+export function Parallax({alt, image, text}) {
+  return (
+    <Box className={styles.parallax}>
+      <Box className={styles.parallaxImage}>
+        <GatsbyImage
+          alt={alt}
+          image={getImage(image)}
+        />
+      </Box>
+
+      <Box className={styles.parallaxText}>{text}</Box>
+    </Box>
+  )
+}
