@@ -17,8 +17,10 @@ import {
   Text,
   IconLink,
   VisuallyHidden,
+  Subhead,
 } from "./ui"
 import BrandLogo from "./brand-logo"
+import { underline } from "./footer.css"
 
 const socialMedia = {
   TWITTER: {
@@ -149,6 +151,31 @@ export default function Footer() {
 
   return (
     <Box as="footer" paddingY={4}>
+      <Container>
+        <Flex gap={4} variant="centerNoWrap">
+          <Box width="third">
+            <Subhead className={underline}>{"Название компании"}</Subhead>
+            <Text as="p">
+              Перепечатка, а равно и использование материалов данного сайта
+              разрешается только по согласию с владельцем."
+            </Text>
+          </Box>
+          <Box width="third">
+            <Subhead className={underline}>Обратная связь</Subhead>
+            <Text as="p">
+              Оставьте заявку и наши менеджеры свяжутся с вами в течении 15
+              минут
+            </Text>
+            <Text as="p">Здесь установить форму обратной связи</Text>
+          </Box>
+          <Box width="third">
+            <Subhead className={underline}>Контакты</Subhead>
+            <Text as="p">+7 (123) 456 78 90</Text>
+            <Text as="p">ул Терская, 217, офис 123</Text>
+            <Text as="p">mail@mail.ru</Text>
+          </Box>
+        </Flex>
+      </Container>
       <Container>
         <Flex variant="start" responsive>
           <NavLink to="/">
