@@ -79,6 +79,7 @@ export type FlexVariants =
   | "stretch"
   | "spaceBetween"
   | "center"
+  | "centerNoWrap"
   | "responsive"
 
 export const flexVariants: Record<FlexVariants, string> = styleVariants({
@@ -113,6 +114,10 @@ export const flexVariants: Record<FlexVariants, string> = styleVariants({
     width: "100%",
     flexWrap: "wrap",
     justifyContent: "center",
+  },
+  centerNoWrap: {
+    justifyContent: "center",
+    alignItems: "start"
   },
   responsive: {
     flexDirection: "column",
@@ -199,7 +204,7 @@ export const box = styleVariants({
 export const border = styleVariants({
   border: {
     border: "1px solid",
-  }
+  },
 })
 
 export const section = style({
@@ -654,7 +659,7 @@ export const parallaxImage = style({
 
 export const parallaxText = style({
   fontSize: "72px",
-       position: "absolute",
+  position: "absolute",
   inset: "0",
   transform: "translateZ(-2px) translateX(30%) translateY(110%) scale(3)",
 })
