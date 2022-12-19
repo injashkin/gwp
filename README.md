@@ -347,6 +347,10 @@ yarn clean && yarn start
 
 ---
 
+## Иконки
+
+В этом проекте применяются SVG иконки из пакета [react-feather](https://www.npmjs.com/package/react-feather). Изображение и название иконок можно посмотреть [здесь](https://feathericons.com/)
+
 ## 🎓 Learning Gatsby
 
 Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.com/). Here are some places to start:
