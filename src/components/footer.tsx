@@ -6,6 +6,9 @@ import {
   Facebook,
   Youtube,
   GitHub,
+  Phone,
+  MapPin,
+  Mail,
 } from "react-feather"
 import {
   Container,
@@ -74,6 +77,7 @@ interface FooterData {
   meta: { id: string; href: string; text: string }[]
   copyright: string
   socialLinks: { id: string; service: string; username: string }[]
+  contacts: { id: string; icon: JSX.Element; contact: string }[]
 }
 
 const data: FooterData = {
@@ -143,11 +147,28 @@ const data: FooterData = {
       username: "gatsbyjs",
     },
   ],
+  contacts: [
+    {
+      id: "0",
+      icon: <Phone />,
+      contact: "+7 (123) 456 78 90",
+    },
+    {
+      id: "1",
+      icon: <MapPin />,
+      contact: "ул Терская, 217, офис 123",
+    },
+    {
+      id: "2",
+      icon: <Mail />,
+      contact: "mail@mail.ru",
+    },
+  ],
   copyright: "© 2022 Gatsby Inc. All rights reserved",
 }
 
 export default function Footer() {
-  const { links, meta, socialLinks, copyright } = data
+  const { links, meta, socialLinks, copyright, contacts } = data
 
   return (
     <Box as="footer" paddingY={4}>
@@ -157,7 +178,7 @@ export default function Footer() {
             <Subhead className={underline}>{"Название компании"}</Subhead>
             <Text as="p">
               Перепечатка, а равно и использование материалов данного сайта
-              разрешается только по согласию с владельцем."
+              разрешается только по согласию с владельцем.
             </Text>
           </Box>
           <Box width="third">
@@ -170,9 +191,17 @@ export default function Footer() {
           </Box>
           <Box width="third">
             <Subhead className={underline}>Контакты</Subhead>
-            <Text as="p">+7 (123) 456 78 90</Text>
-            <Text as="p">ул Терская, 217, офис 123</Text>
-            <Text as="p">mail@mail.ru</Text>
+            {contacts &&
+              contacts.map((item) => {
+                return (
+                  <Flex key={item.id} variant="start">
+                    <>
+                      {item.icon}
+                      <Text as="p">{item.contact}</Text>
+                    </>
+                  </Flex>
+                )
+              })}
           </Box>
         </Flex>
       </Container>
