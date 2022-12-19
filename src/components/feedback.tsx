@@ -1,4 +1,5 @@
 import * as React from "react"
+import { formControl, button } from "./feedback.css"
 import { Box, NavLink, Text } from "./ui"
 
 export default function Feedback() {
@@ -8,17 +9,35 @@ export default function Feedback() {
         Оставьте заявку и наши менеджеры свяжутся с вами в течении 15 минут
       </Text>
       <Box as="form">
-        <Box>
-          <input type="text" placeholder="* Имя:"></input>
+        <Box paddingY={2}>
+          <input
+            type="text"
+            placeholder="* Имя:"
+            className={formControl}
+          ></input>
         </Box>
-        <Box>
-          <input type="text" placeholder="* Телефон:"></input>
+        <Box paddingY={2}>
+          <input
+            type="text"
+            placeholder="* Телефон:"
+            className={formControl}
+          ></input>
         </Box>
       </Box>
-      <Text as="small">
-        Отправляя данную форму, вы соглашаетесь c{" "}
-        {<NavLink target="_blank" to="http://2166.wp.shabloner.ru/politika-konfidencialnosti?no_bottom=1">Политикой конфиденциальности</NavLink>}
-      </Text>
+      <Box paddingY={3}>
+        <Text as="small">
+          Отправляя данную форму, вы соглашаетесь c{" "}
+          {
+            <NavLink
+              target="_blank"
+              to="http://2166.wp.shabloner.ru/politika-konfidencialnosti?no_bottom=1"
+            >
+              Политикой конфиденциальности
+            </NavLink>
+          }
+        </Text>
+      </Box>
+      <button type="submit" className={button}>Отправить</button>
     </Box>
   )
 }
