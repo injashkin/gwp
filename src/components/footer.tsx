@@ -24,6 +24,7 @@ import {
 } from "./ui"
 import BrandLogo from "./brand-logo"
 import { underline } from "./footer.css"
+import Feedback from "./feedback"
 
 const socialMedia = {
   TWITTER: {
@@ -183,11 +184,7 @@ export default function Footer() {
           </Box>
           <Box width="third">
             <Subhead className={underline}>Обратная связь</Subhead>
-            <Text as="p">
-              Оставьте заявку и наши менеджеры свяжутся с вами в течении 15
-              минут
-            </Text>
-            <Text as="p">Здесь установить форму обратной связи</Text>
+            <Feedback></Feedback>
           </Box>
           <Box width="third">
             <Subhead className={underline}>Контакты</Subhead>
