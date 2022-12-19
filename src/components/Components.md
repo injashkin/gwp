@@ -1,5 +1,7 @@
 ## Container
 
+Создает блок div с указанной шириной и отцентрованный по горизонтали
+
 <Container width="fullbleed"></Container>
 <Container className={desktopHeaderNavWrapper}></Container>
 
@@ -23,6 +25,8 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 
 ## Flex и FlexList
 
+Создает флекс контейнер
+
 <Flex gap={4} variant="spaceBetween"></Flex>
 <FlexList wrap gap={4}></FlexList>
 <Flex responsive variant="end"></Flex>
@@ -32,7 +36,8 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 - `variant` - Можно задавать следующие значения (через дефис указано, чему соответствует в CSS):
 
   - `"stretch"` - alignItems: "stretch"
-  - `"center"` - width: "100%", flexWrap: "wrap", justifyContent: "center",
+  - `"center"` - width: "100%", flexWrap: "wrap", justifyContent: "center"
+  - `"centerNoWrap"` - width: "100%", justifyContent: "center"
   - `"end"` - alignItems: "flex-end"
   - `"start"` - alignItems: "flex-start"
   - `"baseline"` - align-items: "flex-start"
@@ -40,13 +45,14 @@ fullbleed - то же, что и normal плюс удвоенные падинг
   - `"wrap"` - flex-wrap: "wrap"
   - `"columnStart"` - flexDirection: "column", alignItems: "flex-start",
   - `"spaceBetween"` - width: "100%", flexWrap: "wrap", justifyContent: "space-between",
-  - `"responsive"` - для мобильных flexDirection: "column", для десктопов flexDirection: "row",1
+  - `"responsive"` - для мобильных flexDirection: "column", для десктопов flexDirection: "row"
+  - если `variant` не указан, то align-items: "center"
 
-- `gap` - Аналогично column-gap для flex в css. Принимает значения `0 | 1 | 2 | 3 | 4 | 5 | 6`, что соответствует `0 | 4px | 8px | 16px | 32px | 64px | 128px`.
+- `gap` - Аналогично column-gap для flex в css. Принимает значения `0 | 1 | 2 | 3 | 4 | 5 | 6`, что соответствует `0 | 4px | 8px | 16px | 32px | 64px | 128px`. По умолчанию 16px
 
 - `gutter` - Пока не понял. Принимает те же значения, что и свойство gap. Влияет на margin-left и margin-right.
 
-- `wrap` - Все дочерние элементы начинаются с новой строки.
+- `wrap` - Разрешает перенос дочерних элементов на новую строку.
 
 - `responsive` -
 - `marginY` -
@@ -128,12 +134,14 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 
 ## Box
 
+Если не указывать as, то компонент Box - это элемент div
+
 <Box center paddingY={5}></Box>
 <Box as="p"></Box>
 
 - as - Устанавливает тег элемента.
 
-- width - По умолчанию "full". Принимает значения
+- width - Устанавливает ширину. По умолчанию "full". Принимает значения
   "full" | "half" | "quarter" | "third" | "twothirds" | "fitContent",
   что соответствует  
    100% | 50% | 25% | 33.3333% | 33.3333% | fit-content
@@ -149,4 +157,38 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 
 - radius,
 - center = false,
+- border,
 - order - 0 | 1 | 2 | 3
+
+## Space
+
+```jsx
+<Space />
+<Space size={5} />
+```
+
+- size - Устанавливает пустой блок, у которого задан margin. По умолчанию - auto
+  Принимает значения
+  "auto" | 0 | 1 | 2 | 3 | 4 | 5 | 6,
+  что соответствует
+  "auto" | 0 | 4px | 8px |16px | 32px | 64px | 128px
+
+---
+
+## NavLink
+
+Компонент-обертка, который превращает дочерний компонент в ссылку.
+
+```jsx
+<NavLink to={link.href}>
+  <Text variant="small">{link.text}</Text>
+</NavLink>
+```
+
+```jsx
+<NavLink to={link.href}>{link.text}</NavLink>
+```
+
+---
+
+## NavButtonLink
