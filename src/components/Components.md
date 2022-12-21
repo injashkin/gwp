@@ -1,3 +1,62 @@
+## Box
+
+Создает блок <div></div>
+
+<Box center paddingY={5}></Box>
+
+С помощью свойства `as` можно создать любой другой блок:
+
+<Box as="p"></Box>
+
+- as - Устанавливает тег элемента.
+
+- width - Задает ширину блока. По умолчанию `"full"`. Принимает значения
+  `"full" | "half" | "quarter" | "third" | "twothirds" | "fitContent"`,
+  что соответствует  
+   100% | 50% | 25% | 33.3333% | 33.3333% | fit-content.
+
+- background - Устанавливает цвет фона блока. Принимает значения `primary | muted`.
+
+- padding - Устанавливает внутренние отступы со всех сторон. Принимает значения `0 | 1 | 2 | 3 | 4 | 5 | 6`, что соответствует `0 | 4px | 8px | 16px | 32px | 64px | 128px`.
+
+- paddingY - Устанавливает внутренние отступы сверху и снизу. Принимает те же значения, что и `padding`.
+
+- radius - Закругляет углы блока. Принимает значения `"button" | "large" | "circle"`, что соответствует `10px | 24px | 99999px`.
+
+- center - Центрирует содержимое в блоке
+
+- border - Создает вокруг блока сплошную рамку толщиной 1px и цветом, который задан в переменной `muted` в файле colors.css.ts
+
+- order - 0 | 1 | 2 | 3
+
+---
+
+## Section
+
+Создает блок <section></section>
+
+<Section padding={5} radius="large" background="primary"></Section>
+<Section center paddingY={3}></Section>
+
+Свойства для компонента <Section> те же, что и для компонента <Box>. Объясняется это тем, что компонент <Section> вызывает внутри себя компонент <Box> со свойством `as="section"`.
+
+---
+
+## Space
+
+```jsx
+<Space />
+<Space size={5} />
+```
+
+- size - Устанавливает пустой блок, у которого задан margin. По умолчанию - auto
+  Принимает значения
+  "auto" | 0 | 1 | 2 | 3 | 4 | 5 | 6,
+  что соответствует
+  "auto" | 0 | 4px | 8px |16px | 32px | 64px | 128px
+
+---
+
 ## Container
 
 Создает блок div с указанной шириной и отцентрованный по горизонтали
@@ -13,28 +72,18 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 
 ---
 
-## Section
-
-<Section padding={5} radius="large" background="primary"></Section>
-
-Свойства для компонента Section:
-
-- radius - Закругляет углы для секции. Принимает значения `"button" | "large" | "circle"`, что соответствует `10px | 24px | 99999px`.
-
----
-
-## Flex и FlexList
+## Flex
 
 Создает флекс контейнер
 
 <Flex gap={4} variant="spaceBetween"></Flex>
-<FlexList wrap gap={4}></FlexList>
 <Flex responsive variant="end"></Flex>
 
 Свойства для компонента Flex:
 
 - `variant` - Можно задавать следующие значения (через дефис указано, чему соответствует в CSS):
 
+  - если `variant` не указан, то align-items: "center"
   - `"stretch"` - alignItems: "stretch"
   - `"center"` - width: "100%", flexWrap: "wrap", justifyContent: "center"
   - `"centerNoWrap"` - width: "100%", justifyContent: "center"
@@ -46,7 +95,6 @@ fullbleed - то же, что и normal плюс удвоенные падинг
   - `"columnStart"` - flexDirection: "column", alignItems: "flex-start",
   - `"spaceBetween"` - width: "100%", flexWrap: "wrap", justifyContent: "space-between",
   - `"responsive"` - для мобильных flexDirection: "column", для десктопов flexDirection: "row"
-  - если `variant` не указан, то align-items: "center"
 
 - `gap` - Аналогично column-gap для flex в css. Принимает значения `0 | 1 | 2 | 3 | 4 | 5 | 6`, что соответствует `0 | 4px | 8px | 16px | 32px | 64px | 128px`. По умолчанию 16px
 
@@ -58,6 +106,13 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 - `marginY` -
 - `alignItems` -
 
+---
+
+## FlexList
+
+Создает флекс контейнер с тегом <ul>
+
+<FlexList wrap gap={4}></FlexList>
 ---
 
 ## Text
@@ -129,49 +184,6 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 - alt -
 - image -
 - size - можно задать "small" | "medium" | "large", что соответствует "24px" | "32px" | "64px"
-
----
-
-## Box
-
-Если не указывать as, то компонент Box - это элемент div
-
-<Box center paddingY={5}></Box>
-<Box as="p"></Box>
-
-- as - Устанавливает тег элемента.
-
-- width - Устанавливает ширину. По умолчанию "full". Принимает значения
-  "full" | "half" | "quarter" | "third" | "twothirds" | "fitContent",
-  что соответствует  
-   100% | 50% | 25% | 33.3333% | 33.3333% | fit-content
-
-- background,
-- padding,
-
-- paddingY - Устанавливает внутренние отступы сверху и снизу.
-  Принимает значения
-  0 | 1 | 2 | 3 | 4 | 5 | 6,
-  что соответствует
-  0 | 4px | 8px |16px | 32px | 64px | 128px
-
-- radius,
-- center = false,
-- border,
-- order - 0 | 1 | 2 | 3
-
-## Space
-
-```jsx
-<Space />
-<Space size={5} />
-```
-
-- size - Устанавливает пустой блок, у которого задан margin. По умолчанию - auto
-  Принимает значения
-  "auto" | 0 | 1 | 2 | 3 | 4 | 5 | 6,
-  что соответствует
-  "auto" | 0 | 4px | 8px |16px | 32px | 64px | 128px
 
 ---
 
