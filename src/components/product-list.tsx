@@ -41,7 +41,7 @@ function Product(props: ProductProps) {
       )}
       <Box padding={3}>
         <Subhead>{props.heading}</Subhead>
-        <Text>{props.text}</Text>
+        {props.text && <Text>{props.text}</Text>}
         <LinkList links={props.links} />
         <Button href={props.link.url}>Подробнее</Button>
       </Box>
@@ -60,13 +60,16 @@ export default function ProductList(props: ProductListProps) {
   return (
     <Section>
       <Container>
-        <Box center paddingY={4}>
-          <Heading>
-            {props.kicker && <Kicker>{props.kicker}</Kicker>}
-            {props.heading}
-          </Heading>
-          {props.text && <Text>{props.text}</Text>}
-        </Box>
+        {props.heading && (
+          <Box center paddingY={4}>
+            <Heading>
+              {props.kicker && <Kicker>{props.kicker}</Kicker>}
+              {props.heading}
+            </Heading>
+
+            {props.text && <Text>{props.text}</Text>}
+          </Box>
+        )}
         <FlexList gap={5} variant="center">
           {props.content.map((product) => (
             <li key={product.id} className={widthProduct}>
