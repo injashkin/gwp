@@ -21,6 +21,11 @@ export interface HomepageLink {
   text: string
 }
 
+export interface HomeLink {
+  url: string
+  title: string
+}
+
 export interface HomepageImage {
   id: string
   alt: string

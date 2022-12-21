@@ -15,17 +15,17 @@ import {
   LinkList,
   HomepageImage,
   HomepageLink,
+  HomeLink,
 } from "./ui"
 
 import { GatsbyImage } from "gatsby-plugin-image"
-import { text } from "./404.css"
 
 interface ProductProps {
   id: string
   image: HomepageImage
   heading: string
   text: string
-  link: string
+  link: HomeLink
   links: HomepageLink[]
 }
 
@@ -43,7 +43,7 @@ function Product(props: ProductProps) {
         <Subhead>{props.heading}</Subhead>
         <Text>{props.text}</Text>
         <LinkList links={props.links} />
-        <Button>"iuyhkjhkjh"</Button>
+        <Button href={props.link.url}>Подробнее</Button>
       </Box>
     </Box>
   )
@@ -89,6 +89,10 @@ export const query = graphql`
       id
       heading
       text
+      link {
+        url
+        title
+      }
       image {
         alt
         id

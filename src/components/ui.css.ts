@@ -203,7 +203,7 @@ export const box = styleVariants({
 
 export const border = styleVariants({
   border: {
-    border: "1px solid",
+    border: `1px solid ${theme.colors.muted}`,
   },
 })
 
