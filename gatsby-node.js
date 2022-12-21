@@ -223,6 +223,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
       links: [HomepageLink] @link
       logos: [HomepageImage] @link
     }
+
+    type MapYandex implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      heading: String
+      text: String
+      link: String
+    }
   `)
 
   // pages
@@ -280,19 +288,19 @@ exports.onCreateNode = ({
 
   const createLinkNode =
     (parent) =>
-    ({ url, title, ...rest }, i) => {
-      const id = createNodeId(`${parent.id} >>> HomepageLink ${url} ${i}`)
-      actions.createNode({
-        id,
-        internal: {
-          type: "HomepageLink",
-          contentDigest: createContentDigest({ url, title }),
-        },
-        href: url,
-        text: title,
-      })
-      return id
-    }
+      ({ url, title, ...rest }, i) => {
+        const id = createNodeId(`${parent.id} >>> HomepageLink ${url} ${i}`)
+        actions.createNode({
+          id,
+          internal: {
+            type: "HomepageLink",
+            contentDigest: createContentDigest({ url, title }),
+          },
+          href: url,
+          text: title,
+        })
+        return id
+      }
 
   const createItemNode = (parent, type) => (data, i) => {
     const id = createNodeId(`${parent.id} >>> ${type} ${i}`)
@@ -330,6 +338,7 @@ exports.onCreateNode = ({
           statList,
           testimonialList,
           cta,
+          mapYandex,
         } = node.homepage
 
         const content = {
@@ -419,6 +428,10 @@ exports.onCreateNode = ({
               .filter(Boolean)
               .map(createLinkNode(node.id)),
           },
+          mapYandex: {
+            id: createNodeId(`${node.id} >>> MapYandex`),
+            ...mapYandex,
+          },
         }
 
         actions.createNode({
@@ -494,6 +507,15 @@ exports.onCreateNode = ({
         })
 
         actions.createNode({
+          ...blocks.mapYandex,
+          blocktype: "MapYandex",
+          internal: {
+            type: "MapYandex",
+            contentDigest: node.internal.contentDigest,
+          },
+        })
+
+        actions.createNode({
           ...node.homepage,
           id: createNodeId(`${node.id} >>> Homepage`),
           internal: {
@@ -513,6 +535,7 @@ exports.onCreateNode = ({
             blocks.statList.id,
             blocks.testimonialList.id,
             blocks.cta.id,
+            blocks.mapYandex.id,
           ],
         })
 

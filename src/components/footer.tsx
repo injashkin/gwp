@@ -25,7 +25,6 @@ import {
 import BrandLogo from "./brand-logo"
 import { underline } from "./footer.css"
 import Feedback from "./feedback"
-import MapWidget from "./map-widget"
 
 const socialMedia = {
   TWITTER: {
@@ -174,7 +173,6 @@ export default function Footer() {
 
   return (
     <Box as="footer" paddingY={4}>
-      <MapWidget></MapWidget>
       <Container>
         <Flex gap={4} variant="centerNoWrap">
           <Box width="third">
