@@ -11,15 +11,19 @@ import {
   Space,
   HomepageImage,
 } from "./ui"
+import { backImage, opasity } from "./benefit-list.css"
+import * as I from "react-feather"
 
 interface BenefitProps {
   id: string
   image?: HomepageImage
+  icon: JSX.Element
   heading: string
   text: string
 }
 
 function Benefit(props: BenefitProps) {
+
   return (
     <Box as="li" width="third" padding={4} paddingY={3}>
       {props.image && (
@@ -29,6 +33,8 @@ function Benefit(props: BenefitProps) {
           size="small"
         />
       )}
+      <I.Mail />
+      {/*props.icon*/}
       <Space size={2} />
       <Heading variant="subheadSmall">{props.heading}</Heading>
       <Text>{props.text}</Text>
@@ -44,19 +50,21 @@ export interface BenefitListProps {
 
 export default function BenefitList(props: BenefitListProps) {
   return (
-    <Section>
-      <Container>
-        <Box center>
-          {props.heading && <Heading>{props.heading}</Heading>}
-          {props.text && <Text variant="lead">{props.text}</Text>}
-        </Box>
-        <Space size={3} />
-        <FlexList gutter={3} variant="start" responsive wrap>
-          {props.content.map((benefit) => (
-            <Benefit key={benefit.id} {...benefit} />
-          ))}
-        </FlexList>
-      </Container>
+    <Section className={backImage} background="primary">
+      <Box  className={opasity}>
+        <Container>
+          <Box center>
+            {props.heading && <Heading>{props.heading}</Heading>}
+            {props.text && <Text variant="lead">{props.text}</Text>}
+          </Box>
+          <Space size={3} />
+          <FlexList gutter={3} variant="start" responsive wrap>
+            {props.content.map((benefit) => (
+              <Benefit key={benefit.id} {...benefit} />
+            ))}
+          </FlexList>
+        </Container>
+      </Box>
     </Section>
   )
 }
@@ -68,6 +76,7 @@ export const query = graphql`
     text
     content {
       id
+      icon
       heading
       text
       image {
