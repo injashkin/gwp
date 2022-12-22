@@ -81,6 +81,7 @@ export type FlexVariants =
   | "center"
   | "centerNoWrap"
   | "responsive"
+  | "stretchCenter"
 
 export const flexVariants: Record<FlexVariants, string> = styleVariants({
   wrap: {
@@ -117,7 +118,7 @@ export const flexVariants: Record<FlexVariants, string> = styleVariants({
   },
   centerNoWrap: {
     justifyContent: "center",
-    alignItems: "start"
+    alignItems: "start",
   },
   responsive: {
     flexDirection: "column",
@@ -126,6 +127,12 @@ export const flexVariants: Record<FlexVariants, string> = styleVariants({
         flexDirection: "row",
       },
     },
+  },
+  stretchCenter: {
+    flexWrap: "wrap",
+    alignItems: "normal",
+    alignContent: "stretch",
+    justifyContent: "center",
   },
 })
 
