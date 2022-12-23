@@ -10,34 +10,42 @@ import {
   Text,
   Space,
   HomepageImage,
+  NavLink,
 } from "./ui"
-import { backImage, opasity } from "./benefit-list.css"
+import { backgroundIcon, backImage, hoverBenefit, opasity } from "./benefit-list.css"
 import * as I from "react-feather"
+import { colors } from "../colors.css"
 
 interface BenefitProps {
   id: string
   image?: HomepageImage
-  icon: JSX.Element
+  icon: string
   heading: string
   text: string
 }
 
 function Benefit(props: BenefitProps) {
-
+  const FeatherIcon = I[props.icon]
   return (
     <Box as="li" width="third" padding={4} paddingY={3}>
-      {props.image && (
-        <Icon
-          alt={props.image.alt}
-          image={props.image.gatsbyImageData}
-          size="small"
-        />
-      )}
-      <I.Mail />
-      {/*props.icon*/}
-      <Space size={2} />
-      <Heading variant="subheadSmall">{props.heading}</Heading>
-      <Text>{props.text}</Text>
+      <NavLink className={hoverBenefit}>
+        <Box center>
+          {props.image && (
+            <Icon
+              alt={props.image.alt}
+              image={props.image.gatsbyImageData}
+              size="small"
+            />
+          )}
+          <Box radius="circle" className={backgroundIcon}>
+            {props.icon && <FeatherIcon size="42px" color={colors.primary} />}
+          </Box>
+
+          <Space size={2} />
+          <Heading variant="subheadSmall">{props.heading}</Heading>
+          <Text>{props.text}</Text>
+        </Box>
+      </NavLink>
     </Box>
   )
 }
@@ -51,7 +59,7 @@ export interface BenefitListProps {
 export default function BenefitList(props: BenefitListProps) {
   return (
     <Section className={backImage} background="primary">
-      <Box  className={opasity}>
+      <Box className={opasity}>
         <Container>
           <Box center>
             {props.heading && <Heading>{props.heading}</Heading>}

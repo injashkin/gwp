@@ -1,4 +1,5 @@
 import { style } from "@vanilla-extract/css"
+import { colors } from "../colors.css"
 
 export const backImage = style({
   //position: "relative",
@@ -17,3 +18,25 @@ export const opasity = style({
   paddingTop: "60px",
   paddingBottom: "60px",
 })
+
+export const hoverBenefit = style({
+  ":hover": {}
+  
+})
+
+export const backgroundIcon = style({
+  color: "inherit",
+  display: "flex",
+  width: "94px",
+  height: "94px",
+  alignItems: "center",
+  justifyContent: "center",
+  backgroundColor: colors.background,
+  border: "1px solid",
+  borderColor: colors.primary,
+  ":hover": {
+    backgroundColor: colors.muted,
+  },
+})
+
+
