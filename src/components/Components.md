@@ -15,7 +15,7 @@
   что соответствует  
    100% | 50% | 25% | 33.3333% | 33.3333% | fit-content.
 
-- background - Устанавливает цвет фона блока. Принимает значения `primary | muted`.
+- background - Устанавливает в блоке цвет фона и контрасный этому фону цвет текста. Принимает значения `primary | muted`. Если не указано, то наследует значение родителя (значения цветов смотри в файле colors.css.ts) Если цвет фона установлен primary | muted, то автоматически цвет текста будет соответственно background | primary. Если цвет фона родителя - background, то цвет текста - text.
 
 - padding - Устанавливает внутренние отступы со всех сторон. Принимает значения `0 | 1 | 2 | 3 | 4 | 5 | 6`, что соответствует `0 | 4px | 8px | 16px | 32px | 64px | 128px`.
 
@@ -33,10 +33,18 @@
 
 ## Section
 
-Создает блок <section></section>
+Создает блок <section></section>, который по умолчанию имеет следующие CSS свойства:
 
+```css
+margin-top: 64px;
+margin-bottom: 64px;
+width: 100%;
+```
+
+```jsx
 <Section padding={5} radius="large" background="primary"></Section>
 <Section center paddingY={3}></Section>
+```
 
 Свойства для компонента <Section> те же, что и для компонента <Box>. Объясняется это тем, что компонент <Section> вызывает внутри себя компонент <Box> со свойством `as="section"`.
 
@@ -84,7 +92,7 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 - `variant` - Можно задавать следующие значения (через дефис указано, чему соответствует в CSS):
 
   - если `variant` не указан, то align-items: "center"
-  - `"stretch"` - alignItems: "stretch"
+  - `"stretch"` - alignItems: "stretch",
   - `"center"` - width: "100%", flexWrap: "wrap", justifyContent: "center"
   - `"centerNoWrap"` - width: "100%", justifyContent: "center"
   - `"end"` - alignItems: "flex-end"
@@ -95,6 +103,7 @@ fullbleed - то же, что и normal плюс удвоенные падинг
   - `"columnStart"` - flexDirection: "column", alignItems: "flex-start",
   - `"spaceBetween"` - width: "100%", flexWrap: "wrap", justifyContent: "space-between",
   - `"responsive"` - для мобильных flexDirection: "column", для десктопов flexDirection: "row"
+  -  `"stretchCenter"` - flexWrap: "wrap", alignItems: "normal", alignContent: "stretch", justifyContent: "center"
 
 - `gap` - Аналогично column-gap для flex в css. Принимает значения `0 | 1 | 2 | 3 | 4 | 5 | 6`, что соответствует `0 | 4px | 8px | 16px | 32px | 64px | 128px`. По умолчанию 16px
 
@@ -103,8 +112,10 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 - `wrap` - Разрешает перенос дочерних элементов на новую строку.
 
 - `responsive` -
+
 - `marginY` -
-- `alignItems` -
+
+- `alignItems` - принимает все свойства, что и variant.
 
 ---
 
@@ -189,7 +200,7 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 
 ## NavLink
 
-Компонент-обертка, который превращает дочерний компонент в ссылку.
+Компонент-обертка, который превращает дочерний компонент в ссылку. В качестве свойства для задания URL можно использовать `to` или `href`.
 
 ```jsx
 <NavLink to={link.href}>
@@ -198,7 +209,7 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 ```
 
 ```jsx
-<NavLink to={link.href}>{link.text}</NavLink>
+<NavLink href={link.href}>{link.text}</NavLink>
 ```
 
 ---
