@@ -12,9 +12,15 @@ import {
   HomepageImage,
   NavLink,
 } from "./ui"
-import { backgroundIcon, backImage, hoverBenefit, opasity } from "./benefit-list.css"
+import {
+  backgroundIcon,
+  backImage,
+  hoverBenefit,
+  opasity,
+  colorIcon,
+  colorText,
+} from "./benefit-list.css"
 import * as I from "react-feather"
-import { colors } from "../colors.css"
 
 interface BenefitProps {
   id: string
@@ -22,14 +28,15 @@ interface BenefitProps {
   icon: string
   heading: string
   text: string
+  link: { url: string }
 }
 
 function Benefit(props: BenefitProps) {
   const FeatherIcon = I[props.icon]
   return (
     <Box as="li" width="third" padding={4} paddingY={3}>
-      <NavLink className={hoverBenefit}>
-        <Box center>
+      <NavLink to={props.link.url}>
+        <Box center className={hoverBenefit}>
           {props.image && (
             <Icon
               alt={props.image.alt}
@@ -38,12 +45,14 @@ function Benefit(props: BenefitProps) {
             />
           )}
           <Box radius="circle" className={backgroundIcon}>
-            {props.icon && <FeatherIcon size="42px" color={colors.primary} />}
+            {props.icon && <FeatherIcon size="42px" color={colorIcon} />}
           </Box>
 
           <Space size={2} />
-          <Heading variant="subheadSmall">{props.heading}</Heading>
-          <Text>{props.text}</Text>
+          <Heading variant="subheadSmall" className={colorText}>
+            {props.heading}
+          </Heading>
+          <Text className={colorText}>{props.text}</Text>
         </Box>
       </NavLink>
     </Box>
@@ -87,6 +96,9 @@ export const query = graphql`
       icon
       heading
       text
+      link {
+        url
+      }
       image {
         id
         gatsbyImageData

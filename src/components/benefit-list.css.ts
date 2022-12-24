@@ -1,8 +1,7 @@
-import { style } from "@vanilla-extract/css"
+import { createVar, style } from "@vanilla-extract/css"
 import { colors } from "../colors.css"
 
 export const backImage = style({
-  //position: "relative",
   background:
     "url(http://2166.wp.shabloner.ru/themes/shabloner_2166/files/st_block_102814_4_bg.jpg)",
   backgroundPosition: "left 50% top 50%",
@@ -19,13 +18,14 @@ export const opasity = style({
   paddingBottom: "60px",
 })
 
-export const hoverBenefit = style({
-  ":hover": {}
-  
+export const colorText = style({
+  color: colors.background,
 })
 
+export const colorIcon = createVar()
+export const hoverBenefit = style({})
+
 export const backgroundIcon = style({
-  color: "inherit",
   display: "flex",
   width: "94px",
   height: "94px",
@@ -34,9 +34,21 @@ export const backgroundIcon = style({
   backgroundColor: colors.background,
   border: "1px solid",
   borderColor: colors.primary,
-  ":hover": {
-    backgroundColor: colors.muted,
+
+  transitionProperty: "background-color",
+  transitionDuration: "0.2s",
+  transitionTimingFunction: "ease-in-out",
+
+  vars: {
+    [colorIcon]: colors.primary
+  },
+  selectors: {
+    [`${hoverBenefit}:hover &`]: {
+      backgroundColor: colors.text,
+      borderColor: colors.background,
+      vars: {
+        [colorIcon]: colors.background
+      }
+    },
   },
 })
-
-
