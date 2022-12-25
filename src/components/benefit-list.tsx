@@ -11,10 +11,10 @@ import {
   Space,
   HomepageImage,
   NavLink,
+  FixedBGI,
 } from "./ui"
 import {
   backgroundIcon,
-  backImage,
   hoverBenefit,
   opasity,
   colorIcon,
@@ -62,26 +62,29 @@ function Benefit(props: BenefitProps) {
 export interface BenefitListProps {
   heading?: string
   text?: string
+  image?: { url: string }
   content: BenefitProps[]
 }
 
 export default function BenefitList(props: BenefitListProps) {
   return (
-    <Section className={backImage} background="primary">
-      <Box className={opasity}>
-        <Container>
-          <Box center>
-            {props.heading && <Heading>{props.heading}</Heading>}
-            {props.text && <Text variant="lead">{props.text}</Text>}
-          </Box>
-          <Space size={3} />
-          <FlexList gutter={3} variant="start" responsive wrap>
-            {props.content.map((benefit) => (
-              <Benefit key={benefit.id} {...benefit} />
-            ))}
-          </FlexList>
-        </Container>
-      </Box>
+    <Section>
+      <FixedBGI background="primary" url={props.image.url}>
+        <Box className={opasity}>
+          <Container>
+            <Box center>
+              {props.heading && <Heading>{props.heading}</Heading>}
+              {props.text && <Text variant="lead">{props.text}</Text>}
+            </Box>
+            <Space size={3} />
+            <FlexList gutter={3} variant="start" responsive wrap>
+              {props.content.map((benefit) => (
+                <Benefit key={benefit.id} {...benefit} />
+              ))}
+            </FlexList>
+          </Container>
+        </Box>
+      </FixedBGI>
     </Section>
   )
 }
@@ -91,6 +94,9 @@ export const query = graphql`
     id
     heading
     text
+    image {
+      url
+    }
     content {
       id
       icon
@@ -98,11 +104,6 @@ export const query = graphql`
       text
       link {
         url
-      }
-      image {
-        id
-        gatsbyImageData
-        alt
       }
     }
   }

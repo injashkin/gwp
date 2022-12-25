@@ -379,17 +379,25 @@ export function BlockLink(props) {
   return <Link className={styles.blockLink} {...props} />
 }
 
-export function Parallax({alt, image, text}) {
+export function Parallax({ alt, image, text }) {
   return (
     <Box className={styles.parallax}>
       <Box className={styles.parallaxImage}>
-        <GatsbyImage
-          alt={alt}
-          image={getImage(image)}
-        />
+        <GatsbyImage alt={alt} image={getImage(image)} />
       </Box>
 
       <Box className={styles.parallaxText}>{text}</Box>
     </Box>
   )
+}
+
+/**
+ * Создает блок с фиксированным фоновым изображением
+ * @param url
+ * @returns По умолчанию блок <div></div>
+ */
+
+export function FixedBGI({url, ...props }) {
+  props.style = { backgroundImage: `url(${url})` }
+  return <Box className={styles.bgImage} {...props} />
 }

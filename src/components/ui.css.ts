@@ -670,3 +670,12 @@ export const parallaxText = style({
   inset: "0",
   transform: "translateZ(-2px) translateX(30%) translateY(110%) scale(3)",
 })
+
+export const bgImage = style({
+  backgroundPosition: "left 50% top 50%",
+  backgroundSize: "cover",
+  backgroundRepeat: "no-repeat",
+  backgroundAttachment: "fixed",
+  marginTop: "unset",
+  marginBottom: "unset",
+})

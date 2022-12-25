@@ -148,6 +148,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       blocktype: String
       heading: String
       text: String
+      image: HomepageImage @link
       content: [HomepageBenefit] @link
     }
 
@@ -365,7 +366,7 @@ exports.onCreateNode = ({
           ]
             .filter(Boolean)
             .map(createItemNode(node, "HomepageBenefit")),
-          stats: [statList.stat1, statList.stat2, statList.stat3, statList.stat4, statList.stat5]
+          stats: [statList.stat1, statList.stat2, statList.stat3, statList.stat4]
             .filter(Boolean)
             .map(createItemNode(node, "HomepageStat")),
           testimonials: [
@@ -405,6 +406,7 @@ exports.onCreateNode = ({
           benefitList: {
             id: createNodeId(`${node.id} >>> HomepageBenefitList`),
             ...benefitList,
+            image: benefitList.image?.id,
             content: content.benefits,
           },
           statList: {
