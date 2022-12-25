@@ -1,6 +1,5 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import {
   Container,
   Section,
@@ -11,12 +10,11 @@ import {
   Flex,
   Box,
   Icon,
-  ButtonList,
-  Nudge,
   HomepageImage,
   HomepageLink,
-  Parallax,
+  FixedBGI,
 } from "./ui"
+import { opasity } from "./stat-list.css"
 
 interface StatProps {
   id: string
@@ -45,33 +43,39 @@ export interface StatListProps {
 
 export default function StatList(props: StatListProps) {
   return (
-    <div>
-      <Container width="fullbleed">
-        <Section padding={5} radius="large">
-          <Flex responsive variant="end">
-            <Box width="full">
-              {props.icon && (
-                <Icon alt={props.icon.alt} image={props.icon.gatsbyImageData} />
-              )}
-              <Heading>
-                {props.kicker && <Kicker>{props.kicker}</Kicker>}
-                {props.heading}
-              </Heading>
-              {props.text && <Text variant="lead">{props.text}</Text>}
-              <FlexList wrap gap={4}>
-                {props.content.map((stat) => (
-                  <li key={stat.id}>
-                    <Stat {...stat} />
-                  </li>
-                ))}
-              </FlexList>
-              <ButtonList links={props.links} reversed />
-              <Box>{"sd"}</Box>
-            </Box>
-          </Flex>
-        </Section>
-      </Container>
-      <Box width="full">
+    <>
+      <Section>
+        <FixedBGI background="primary" url={props.image.url}>
+        <Box className={opasity}>
+          <Container>
+            <Flex responsive variant="end">
+              <Box width="full" center>
+                {props.icon && (
+                  <Icon
+                    alt={props.icon.alt}
+                    image={props.icon.gatsbyImageData}
+                  />
+                )}
+                <Heading>
+                  {props.kicker && <Kicker>{props.kicker}</Kicker>}
+                  {props.heading}
+                </Heading>
+                {props.text && <Text variant="lead">{props.text}</Text>}
+                <FlexList wrap gap={4}>
+                  {props.content.map((stat) => (
+                    <li key={stat.id}>
+                      <Stat {...stat} />
+                    </li>
+                  ))}
+                </FlexList>
+              </Box>
+            </Flex>
+          </Container>
+          </Box>
+        </FixedBGI>
+      </Section>
+
+      {/*<Box width="full">
         {props.image && (
           <Nudge right={5} bottom={5}>
             <Parallax
@@ -81,8 +85,8 @@ export default function StatList(props: StatListProps) {
             />
           </Nudge>
         )}
-      </Box>
-    </div>
+        </Box>*/}
+    </>
   )
 }
 
@@ -93,9 +97,7 @@ export const query = graphql`
     heading
     text
     image {
-      id
-      alt
-      gatsbyImageData
+      url
     }
     icon {
       id
