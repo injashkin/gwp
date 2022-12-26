@@ -7,6 +7,7 @@ import { StatListProps } from "./stat-list"
 import { CtaProps } from "./cta"
 import { ProductListProps } from "./product-list"
 import { MapYandexProps } from "./map-yandex"
+import { PromoProps } from "./promo"
 
 import { AboutHeroProps } from "./about-hero"
 import { AboutStatListProps } from "./about-stat-list"
@@ -26,6 +27,7 @@ export { default as AboutStatList } from "./about-stat-list"
 export { default as AboutLeadership } from "./about-leadership"
 export { default as AboutLogoList } from "./about-logo-list"
 export { default as MapYandex } from "./map-yandex"
+export { default as HomepagePromo } from "./promo"
 
 export type SectionProps =
   | HeroProps
@@ -41,6 +43,7 @@ export type SectionProps =
   | AboutLeadershipProps
   | AboutLogoListProps
   | MapYandexProps
+  | PromoProps
 
 type Blocktypes =
   | "HomepageHero"
@@ -56,6 +59,7 @@ type Blocktypes =
   | "AboutLeadership"
   | "AboutLogoList"
   | "MapYandex"
+  | "HomepagePromo"
 
 type WithBlocktype<B = Blocktypes, P = SectionProps> = {
   id: string
@@ -76,3 +80,4 @@ export type HomepageBlock =
   | WithBlocktype<"AboutLeadership", AboutLeadershipProps>
   | WithBlocktype<"AboutLogoList", AboutLogoListProps>
   | WithBlocktype<"MapYandex", MapYandexProps>
+  | WithBlocktype<"HomepagePromo", PromoProps>

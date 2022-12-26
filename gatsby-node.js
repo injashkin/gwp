@@ -232,6 +232,13 @@ exports.createSchemaCustomization = async ({ actions }) => {
       text: String
       link: String
     }
+
+    type HomepagePromo implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      heading: String
+      text: String
+    }
   `)
 
   // pages
@@ -340,6 +347,7 @@ exports.onCreateNode = ({
           testimonialList,
           cta,
           mapYandex,
+          promo,
         } = node.homepage
 
         const content = {
@@ -434,6 +442,10 @@ exports.onCreateNode = ({
             id: createNodeId(`${node.id} >>> MapYandex`),
             ...mapYandex,
           },
+          promo: {
+            id: createNodeId(`${node.id} >>> HomepagePromo`),
+            ...promo,
+          },
         }
 
         actions.createNode({
@@ -509,6 +521,15 @@ exports.onCreateNode = ({
         })
 
         actions.createNode({
+          ...blocks.promo,
+          blocktype: "HomepagePromo",
+          internal: {
+            type: "HomepagePromo",
+            contentDigest: node.internal.contentDigest,
+          },
+        })
+
+        actions.createNode({
           ...blocks.mapYandex,
           blocktype: "MapYandex",
           internal: {
@@ -528,12 +549,14 @@ exports.onCreateNode = ({
           title: node.title,
           description,
           image: node.featuredImage?.node?.id,
+          // Массив content влияет на порядок расположения блоков на странице
           content: [
             blocks.hero.id,
             blocks.logoList.id,
             blocks.productList.id,
             blocks.featureList.id,
             blocks.benefitList.id,
+            blocks.promo.id,
             blocks.statList.id,
             blocks.testimonialList.id,
             blocks.cta.id,
