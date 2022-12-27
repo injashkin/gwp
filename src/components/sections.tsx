@@ -31,6 +31,7 @@ export { default as AboutLogoList } from "./about-logo-list"
 export { default as MapYandex } from "./map-yandex"
 export { default as HomepagePromo } from "./promo"
 export { default as HomepageAbout } from "./about"
+export { default as HomepageClients } from "./clients"
 
 export type SectionProps =
   | HeroProps
