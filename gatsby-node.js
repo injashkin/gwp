@@ -238,6 +238,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       blocktype: String
       heading: String
       text: String
+      links: [HomepageLink] @link
     }
   `)
 
@@ -445,6 +446,7 @@ exports.onCreateNode = ({
           promo: {
             id: createNodeId(`${node.id} >>> HomepagePromo`),
             ...promo,
+            links: [promo.link].filter(Boolean).map(createLinkNode(node.id)),
           },
         }
 
