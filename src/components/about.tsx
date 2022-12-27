@@ -1,6 +1,20 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import { Section, Container, Heading, Text, Box } from "./ui"
+import {
+  Section,
+  Container,
+  Heading,
+  Text,
+  Box,
+  HomepageLink,
+  ButtonList,
+} from "./ui"
+
+export interface PromoProps {
+  heading?: string
+  text?: string
+  links?: HomepageLink[] // <-
+}
 
 export default function About(props) {
   return (
@@ -9,6 +23,7 @@ export default function About(props) {
         <Box center>
           <Heading>{props.heading}</Heading>
           <Text>{props.text}</Text>
+          <ButtonList links={props.links}></ButtonList>
         </Box>
       </Container>
     </Section>
@@ -20,5 +35,9 @@ export const query = graphql`
     id
     heading
     text
+    links {
+      href
+      text
+    }
   }
 `
