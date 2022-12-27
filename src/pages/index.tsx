@@ -57,6 +57,7 @@ export const query = graphql`
         ...HomepageStatListContent
         ...HomepageProductListContent
         ...MapYandexContent
+        ...HomepageAboutContent
       }
     }
   }
