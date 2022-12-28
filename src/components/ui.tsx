@@ -397,7 +397,7 @@ export function Parallax({ alt, image, text }) {
  * @returns По умолчанию блок <div></div>
  */
 
-export function FixedBGI({url, ...props }) {
+export function FixedBGI({ url, ...props }) {
   props.style = { backgroundImage: `url(${url})` }
   return <Box className={styles.bgImage} {...props} />
 }

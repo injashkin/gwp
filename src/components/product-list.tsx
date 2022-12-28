@@ -43,7 +43,7 @@ function Product(props: ProductProps) {
         <Subhead>{props.heading}</Subhead>
         {props.text && <Text>{props.text}</Text>}
         <LinkList links={props.links} />
-        <Button href={props.link.url}>Подробнее</Button>
+        <Button href={props.link.url}>Подробности</Button>
       </Box>
     </Box>
   )

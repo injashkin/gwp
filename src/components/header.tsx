@@ -20,15 +20,16 @@ import {
   mobileNavSVGColorWrapper,
 } from "./header.css"
 import BrandLogo from "./brand-logo"
-import NavItemGroup, { NavItemGroupNavItem } from "./nav-item-group"
-import { text } from "./404.css"
+import NavItemGroup from "./nav-item-group"
 
+/*
 type NavItem = {
   id: string
   navItemType: "Link"
   href: string
   text: string
 }
+
 
 type NavItemGroup = {
   id: string
@@ -45,6 +46,7 @@ interface HeaderData {
     text: string
   }
 }
+
 
 const data: HeaderData = {
   navItems: [
@@ -79,9 +81,26 @@ const data: HeaderData = {
     text: "Sign Up",
   },
 }
+*/
+
+interface HeaderData {
+  cta: {
+    id: string
+    href: string
+    text: string
+  }
+}
+
+const data: HeaderData = {
+  cta: {
+    id: "0",
+    href: "#!",
+    text: "Sign Up",
+  },
+}
 
 export default function Header(props) {
-  const { navItems, cta } = data
+  const { cta } = data
   const [isOpen, setOpen] = React.useState(false)
 
   React.useEffect(() => {

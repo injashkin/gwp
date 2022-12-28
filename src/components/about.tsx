@@ -10,10 +10,10 @@ import {
   ButtonList,
 } from "./ui"
 
-export interface PromoProps {
+export interface AboutProps {
   heading?: string
   text?: string
-  links?: HomepageLink[] // <-
+  links?: HomepageLink[]
 }
 
 export default function About(props) {

@@ -1,6 +1,4 @@
 import { style } from "@vanilla-extract/css"
-import { theme } from "../theme.css"
-import { media } from "./ui.css"
 
 // Класс grid присваиваем родительскому элементу
 export const grid = style({
