@@ -16,11 +16,11 @@ import {
 import {
   backgroundIcon,
   hoverBenefit,
-  opasity,
   colorIcon,
   colorText,
 } from "./benefit-list.css"
 import * as I from "react-feather"
+import { opasity } from "./ui.css"
 
 interface BenefitProps {
   id: string
@@ -67,9 +67,12 @@ export interface BenefitListProps {
 }
 
 export default function BenefitList(props: BenefitListProps) {
+  const url = props.image
+    ? props.image.url
+    : "http://2166.wp.shabloner.ru/themes/shabloner_2166/files/ct_block_102803_image.jpg"
   return (
     <Section>
-      <FixedBGI background="primary" url={props.image.url}>
+      <FixedBGI background="primary" url={url}>
         <Box className={opasity}>
           <Container>
             <Box center>

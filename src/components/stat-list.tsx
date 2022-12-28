@@ -14,7 +14,7 @@ import {
   HomepageLink,
   FixedBGI,
 } from "./ui"
-import { opasity } from "./stat-list.css"
+import { opasity } from "./ui.css"
 
 interface StatProps {
   id: string
@@ -42,10 +42,13 @@ export interface StatListProps {
 }
 
 export default function StatList(props: StatListProps) {
+  const url = props.image
+    ? props.image.url
+    : "http://2166.wp.shabloner.ru/themes/shabloner_2166/files/ct_block_102803_image.jpg"
   return (
     <>
       <Section>
-        <FixedBGI background="primary" url={props.image.url}>
+        <FixedBGI background="primary" url={url}>
         <Box className={opasity}>
           <Container>
             <Flex responsive variant="end">

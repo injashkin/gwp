@@ -650,6 +650,8 @@ export const debug = style({
   outline: "1px solid tomato",
 })
 
+//My
+
 export const parallax = style({
   position: "relative",
   perspective: "1px",
@@ -678,4 +680,10 @@ export const bgImage = style({
   backgroundAttachment: "fixed",
   marginTop: "unset",
   marginBottom: "unset",
+})
+
+export const opasity = style({
+  backgroundColor: "rgba(0, 0, 0, 0.6)",
+  paddingTop: "60px",
+  paddingBottom: "60px",
 })

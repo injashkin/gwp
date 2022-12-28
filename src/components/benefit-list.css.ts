@@ -1,12 +1,6 @@
 import { createVar, style } from "@vanilla-extract/css"
 import { colors } from "../colors.css"
 
-export const opasity = style({
-  backgroundColor: "rgba(0, 0, 0, 0.6)",
-  paddingTop: "60px",
-  paddingBottom: "60px",
-})
-
 export const colorText = style({
   color: colors.background,
 })
