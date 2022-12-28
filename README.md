@@ -156,134 +156,159 @@ If you prefer to use an image, use the [`StaticImage`](https://www.gatsbyjs.com/
 
 ### Создание пользовательских компонентов раздела
 
-Чтобы создать новый тип раздела на домашней странице, вам потребуется создать новый компонент раздела, используя существующие компоненты в качестве примера. Для этого примера мы создадим новый компонент "Banner".
+Чтобы создать новый тип раздела на домашней странице, вам потребуется создать новый компонент раздела, используя существующие компоненты в качестве примера. Для этого примера мы создадим новый компонент "About".
 
 1. Сначала, для поддержки нового компонента создайте свои пользовательские поля в WordPress, для этого сделайте следующее:
 
-   На вкладке _Custom Fields_ создайте новую группу полей с помощью кнопки _+Add New_.
-   В поле _Add New Field Group_ введите имя "Homepage Banner" для этой группы полей.
-   В поле _Field Name_ введите `banner_heading`.
-   Добавьте ещё одно поле с помощью кнопки _+ Add Field_.
-   В поле _Field Name_ введите `banner_text`.
-   Во вкладке _Location Rules_ секции Settings для _Post Type_ обязательно укажите _Page_.
-   Также убедитесь, что для этой группы включена опция _Show in GraphQL_.
-   В правом верхнем углу нажмите кнопку _Save Changes_.
+На вкладке _Группы полей_ выберите страницу Homepage и создайте новую группу полей с помощью кнопки _+ Add Field_
+В поле _Тип поля_ выберите _Группа_
+В поле _Ярлык поля_ введите _About_
+В поле _Имя поля_ введите _about_
+В секции _Вложенные поля_ нажмите кнопку _+ Add Field_
+В поле _Тип поля_ выберите _Текст_
+В поле _Ярлык поля_ введите _Heading_
+В поле _Имя поля_ введите _heading_
+Добавьте еще одно поле с помощью кнопки _+ Add Field_ секции _Вложенные поля_
+В поле _Тип поля_ выберите _Текст_
+В поле _Ярлык поля_ введите _Text_
+В поле _Имя поля_ введите _text_
+Во вкладке _Location Rules_ секции Настройки для _Тип записи_ обязательно укажите _Страница_.
+Также убедитесь, что для этой группы включена опция _Show in GraphQL_.
+В правом верхнем углу нажмите кнопку _Save Changes_.
 
-   Перейдите на вкладку _Pages_, в самом низу отредактируйте два поля в Homepage Banner.
+Перейдите на вкладку _Страницы_, выберите страницу _Homepage_. В самом низу в секции _About_ отредактируйте два поля _Heading_ и _Text_.
 
-2. Обновите `gatsby-node.js`
+В правом верхнем углу нажмите кнопку _Обновить_
 
-   Отредактируйте файл `gatsby-node.js` сайта, добавив тип `HomepageBanner`, который соответствует вашим пользовательским полям в WordPress. Это позволяет домашней странице запрашивать абстрактный тип `HomepageBanner`.
+2. Отредактируйте `gatsby-node.js`
 
-   ```js
-   // in gatsby-node.js
-   exports.createSchemaCustomization = async ({ actions }) => {
-     // ...
-     actions.createTypes(`
-       type HomepageBanner implements Node & HomepageBlock {
-         id: ID!
-         blocktype: String
-         heading: String
-         text: String
-       }
-     `)
-     // ...
-   }
-   // ...
-   exports.onCreateNode = ({ actions, node, createNodeId, createContentDigest }) => {
-   }
-     // ...
-     switch (node.internal.type) {
-       case "WpPage":
-         if (node.slug !== "homepage") return
-         const {
-           homepageHero,
-           homepageCta,
-           statList,
-           testimonialList,
-           productList,
-           logoList,
-           featureList,
-           benefitList,
-           // add the new custom field group here
-           homepageBanner,
-         } = node
+Отредактируйте файл `gatsby-node.js` сайта, добавив тип `HomepageAbout`, который соответствует вашим пользовательским полям в WordPress. Это позволяет домашней странице запрашивать абстрактный тип `HomepageAbout`.
 
-         const heroID = createNodeId(`${node.id} >>> HomepageHero`)
-         // create an node id for the field group
-         const bannerID = createNodeId(`${node.id} >>> HomepageBanner`)
-         // ...
+```js
+// in gatsby-node.js
+exports.createSchemaCustomization = async ({ actions }) => {
+// blocks
+// ...
+actions.createTypes(/* GraphQL */`
+  type HomepageAbout implements Node & HomepageBlock {
+    id: ID!
+    blocktype: String
+    heading: String
+    text: String
+  }
+`)
+// ...
+}
+// ...
+exports.onCreateNode = ({ actions, node, createNodeId, createContentDigest }) => {
+}
+  // ...
+  switch (node.internal.type) {
+    case "WpPage":
+      if (node.slug !== "homepage") return
+      const {
+        homepageHero,
+        homepageCta,
+        statList,
+        testimonialList,
+        productList,
+        logoList,
+        featureList,
+        benefitList,
+        // добавьте новую пользовательскую группу полей здесь
+        about,
+      } = node
 
-         // create a new node for this field group
-         actions.createNode({
-           id: bannerID,
-           internal: {
-             type: "HomepageBanner",
-             contentDigest: createContentDigest(JSON.stringify(homepageBanner)),
-           },
-           parent: node.id,
-           blocktype: "HomepageBanner",
-           heading: homepageBanner.bannerHeading,
-           text: homepageBanner.bannerText,
-         })
-         // ...
-         actions.createNode({
-           ...node,
-           id: createNodeId(`${node.id} >>> Homepage`),
-           internal: {
-             type: "Homepage",
-             contentDigest: node.internal.contentDigest,
-           },
-           parent: node.id,
-           blocktype: "Homepage",
-           image: node.featuredImageId,
-           content: [
-             heroID,
-             logosID,
-             // add your banner content in the postion you would like it to appear on the page
-             bannerID,
-             productsID,
-             featuresID,
-             benefitsID,
-             statsID,
-             testimonialsID,
-             ctaID,
-           ],
-         })
-         // ...
-     }
-   }
-   ```
+      // create a new node for this field group
+      about: {
+        id: createNodeId(`${node.id} >>> HomepageAbout`),
+        ...about,
+      },
 
-3. Next, create the Banner component:
+      actions.createNode({
+        ...blocks.about,
+        blocktype: "HomepageAbout",
+        internal: {
+          type: "HomepageAbout",
+          contentDigest: node.internal.contentDigest,
+        },
+      })
 
-   ```jsx fileExt
-   // src/components/banner.tsx
-   import * as React from "react"
-   import { graphql } from "gatsby"
-   import { Section, Container, Heading, Text } from "./ui"
+      /*
+      actions.createNode({
+        id: bannerID,
+        internal: {
+          type: "HomepageBanner",
+          contentDigest: createContentDigest(JSON.stringify(homepageBanner)),
+        },
+        parent: node.id,
+        blocktype: "HomepageBanner",
+        heading: homepageBanner.bannerHeading,
+        text: homepageBanner.bannerText,
+      })
+      */
 
-   export default function Banner(props) {
-     return (
-       <Section>
-         <Container>
-           <Heading>{props.heading}</Heading>
-           <Text>{props.text}</Text>
-         </Container>
-       </Section>
-     )
-   }
+      // ...
+      actions.createNode({
+        ...node.homepage,
+        id: createNodeId(`${node.id} >>> Homepage`),
+        internal: {
+          type: "Homepage",
+          contentDigest: node.internal.contentDigest,
+        },
+        parent: node.id,
+        blocktype: "Homepage",
+        image: node.featuredImageId,
+        // Массив content влияет на порядок расположения блоков на странице
+        content: [
+          heroID,
+          logosID,
+          // добавьте содержимое вашего баннера в том месте, в котором вы хотели бы, чтобы оно отображалось на странице
+          aboutID,
+          productsID,
+          featuresID,
+          benefitsID,
+          statsID,
+          testimonialsID,
+          ctaID,
+        ],
+      })
+      // ...
+  }
+}
+```
 
-   export const query = graphql`
-     fragment HomepageBannerContent on HomepageBanner {
-       id
-       heading
-       text
-     }
-   `
-   ```
+3. Затем, создайте компонент About:
 
-4. Export the component from `src/components/sections.tsx`
+```jsx fileExt
+// src/components/banner.tsx
+import * as React from "react"
+import { graphql } from "gatsby"
+import { Section, Container, Heading, Text } from "./ui"
+
+
+
+export default function About(props) {
+  return (
+    <Section>
+      <Container>
+        <Heading>{props.heading}</Heading>
+        <Text>{props.text}</Text>
+      </Container>
+    </Section>
+  )
+}
+
+export const query = graphql`
+  fragment HomepageBannerContent on HomepageBanner {
+    id
+    heading
+    text
+  }
+`
+```
+
+4. Экспортируйте компонент из `src/components/sections.tsx`
 
    ```js fileExt
    // src/components/sections.tsx
@@ -298,7 +323,7 @@ If you prefer to use an image, use the [`StaticImage`](https://www.gatsbyjs.com/
    export { default as HomepageProductList } from "./product-list"
 
    // add export for new component
-   export { default as HomepageBanner } from "./banner"
+   export { default as HomepageAbout } from "./about"
    ```
 
 5. Add the GraphQL query fragment to the query in `src/pages/index.tsx`
@@ -328,7 +353,7 @@ If you prefer to use an image, use the [`StaticImage`](https://www.gatsbyjs.com/
            ...HomepageStatListContent
            ...HomepageProductListContent
            # New component fragment
-           ...HomepageBannerContent
+           ...HomepageAboutContent
          }
        }
      }
