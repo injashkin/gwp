@@ -249,7 +249,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       links: [HomepageLink] @link
     }
 
-    type HomepageClients implements Node & HomepageBlock {
+    type HomepageClientList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
       heading: String
@@ -366,7 +366,7 @@ exports.onCreateNode = ({
           mapYandex,
           promo,
           about,
-          clients,
+          clientList,
         } = node.homepage
 
         const content = {
@@ -471,10 +471,10 @@ exports.onCreateNode = ({
             ...about,
             links: [about.link].filter(Boolean).map(createLinkNode(node.id)),
           },
-          clients: {
-            id: createNodeId(`${node.id} >>> HomepageClients`),
-            ...clients,
-            image: clients.image?.id,
+          clientList: {
+            id: createNodeId(`${node.id} >>> HomepageClientList`),
+            ...clientList,
+            image: clientList.image?.id,
           },
 
         }
@@ -579,10 +579,10 @@ exports.onCreateNode = ({
         })
 
         actions.createNode({
-          ...blocks.clients,
-          blocktype: "HomepageClients",
+          ...blocks.clientList,
+          blocktype: "HomepageClientList",
           internal: {
-            type: "HomepageClients",
+            type: "HomepageClientList",
             contentDigest: node.internal.contentDigest,
           },
         })
@@ -608,7 +608,7 @@ exports.onCreateNode = ({
             blocks.promo.id,
             blocks.statList.id,
             blocks.about.id,
-            blocks.clients.id,
+            blocks.clientList.id,
             blocks.testimonialList.id,
             blocks.cta.id,
             blocks.mapYandex.id,
