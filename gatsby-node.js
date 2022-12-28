@@ -249,12 +249,19 @@ exports.createSchemaCustomization = async ({ actions }) => {
       links: [HomepageLink] @link
     }
 
+    type HomepageClient implements Node {
+      id: ID!
+      image: HomepageImage @link
+      links: [HomepageLink] @link
+    }
+
     type HomepageClientList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
       heading: String
       text: String
       image: HomepageImage @link
+      content: [HomepageClient] @link
     }
   `)
 
@@ -404,6 +411,18 @@ exports.onCreateNode = ({
           ]
             .filter(Boolean)
             .map(createItemNode(node, "HomepageTestimonial")),
+          clients: [
+            clientList.client1,
+            clientList.client2,
+            clientList.client3,
+            clientList.client4,
+            clientList.client5,
+            clientList.client6,
+            clientList.client7,
+            clientList.client8,
+            clientList.client9,
+            clientList.client10,
+          ].filter(Boolean).map(createItemNode(node, "HomepageClient"))
         }
 
         const blocks = {
@@ -475,6 +494,7 @@ exports.onCreateNode = ({
             id: createNodeId(`${node.id} >>> HomepageClientList`),
             ...clientList,
             image: clientList.image?.id,
+            content: content.clients, 
           },
 
         }

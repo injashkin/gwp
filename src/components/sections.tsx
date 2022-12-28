@@ -9,6 +9,7 @@ import { ProductListProps } from "./product-list"
 import { MapYandexProps } from "./map-yandex"
 import { PromoProps } from "./promo"
 //import { AboutProps } from "./about"
+import { ClientListProps } from "./client-list"
 
 
 import { AboutHeroProps } from "./about-hero"
@@ -48,6 +49,7 @@ export type SectionProps =
   | AboutLogoListProps
   | MapYandexProps
   | PromoProps
+  | ClientListProps
   // | AboutProps
 
 type Blocktypes =
@@ -65,6 +67,7 @@ type Blocktypes =
   | "AboutLogoList"
   | "MapYandex"
   | "HomepagePromo"
+  | "HomepageClientList"
   // | "HomepageAbout"
 
 type WithBlocktype<B = Blocktypes, P = SectionProps> = {
@@ -87,4 +90,5 @@ export type HomepageBlock =
   | WithBlocktype<"AboutLogoList", AboutLogoListProps>
   | WithBlocktype<"MapYandex", MapYandexProps>
   | WithBlocktype<"HomepagePromo", PromoProps>
+  | WithBlocktype<"HomepageClientList", ClientListProps>
   // | WithBlocktype<"HomepageAbout", AboutProps>
