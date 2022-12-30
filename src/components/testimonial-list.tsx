@@ -1,4 +1,5 @@
 import * as React from "react"
+import { useEffect, useState } from "react"
 import { graphql } from "gatsby"
 import {
   Container,
@@ -13,6 +14,12 @@ import {
   Avatar,
   HomepageImage,
 } from "./ui"
+import {
+  height,
+  relative,
+  sliderBottom,
+  sliderTop,
+} from "./testimonal-list.css"
 
 interface TestimonialProps {
   id: string
@@ -23,7 +30,7 @@ interface TestimonialProps {
 
 function Testimonial(props: TestimonialProps) {
   return (
-    <Flex variant="start">
+    <Box center>
       {props.avatar && (
         <Avatar alt={props.avatar.alt} image={props.avatar.gatsbyImageData} />
       )}
@@ -37,7 +44,7 @@ function Testimonial(props: TestimonialProps) {
           </Text>
         </figcaption>
       </Blockquote>
-    </Flex>
+    </Box>
   )
 }
 
@@ -48,22 +55,39 @@ export interface TestimonialListProps {
 }
 
 export default function TestimonialList(props: TestimonialListProps) {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    setInterval(() => {
+      setCount((prevCount) => (prevCount < 3 ? prevCount + 1 : prevCount = 0 ))
+    }, 5000)
+  }, [])
+
   return (
     <Section>
-      <Container>
+      <Container className={relative}>
         <Box center>
           <Heading>
             {props.kicker && <Kicker>{props.kicker}</Kicker>}
             {props.heading}
           </Heading>
         </Box>
-        <FlexList gutter={3} variant="start" responsive wrap>
-          {props.content.map((testimonial, index) => (
-            <Box as="li" key={testimonial.id + index} width="half" padding={3}>
-              <Testimonial {...testimonial} />
-            </Box>
-          ))}
-        </FlexList>
+        <Box center className={height}>
+          {props.content.map((testimonial, index) => {
+            const classes = index === count ? sliderTop : sliderBottom
+            return (
+              <Box
+                as="div"
+                key={testimonial.id + index}
+                padding={3}
+                border
+                className={classes}
+              >
+                <Testimonial {...testimonial} />
+              </Box>
+            )
+          })}
+        </Box>
       </Container>
     </Section>
   )
