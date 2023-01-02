@@ -1,24 +1,17 @@
 import { style, styleVariants } from "@vanilla-extract/css"
 import { colors } from "../colors.css"
 
-export const sliderTop = style({
+const slideBase = style({
   position: "absolute",
-  zIndex: 2,
-  opacity: 1,
 
   transitionProperty: "opacity",
   transitionDuration: "0.3s",
   transitionTimingFunction: "ease-in-out",
 })
 
-export const sliderBottom = style({
-  position: "absolute",
-  zIndex: 1,
-  opacity: 0,
-
-  transitionProperty: "opacity",
-  transitionDuration: "0.3s",
-  transitionTimingFunction: "ease-in-out",
+export const slide = styleVariants({
+  under: [slideBase, { zIndex: 1, opacity: 0 }],
+  over: [slideBase, { zIndex: 2, opacity: 1 }],
 })
 
 export const height = style({

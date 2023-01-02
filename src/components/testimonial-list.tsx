@@ -8,7 +8,6 @@ import {
   Kicker,
   Flex,
   Box,
-  FlexList,
   Blockquote,
   Text,
   Avatar,
@@ -18,8 +17,7 @@ import {
   author,
   height,
   pointerStyle,
-  sliderBottom,
-  sliderTop,
+  slide,
   wrapAvatar,
   wrapPointer,
 } from "./testimonal-list.css"
@@ -34,7 +32,7 @@ interface TestimonialProps {
 }
 
 function Testimonial(props: TestimonialProps) {
-  const classes = props.index === props.count ? sliderTop : sliderBottom
+  const classes = props.index === props.count ? slide.over : slide.under
   return (
     <Box padding={4} center className={classes}>
       {props.avatar && (
