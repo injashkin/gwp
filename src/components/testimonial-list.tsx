@@ -16,7 +16,7 @@ import {
 } from "./ui"
 import {
   height,
-  relative,
+  pointerStyle,
   sliderBottom,
   sliderTop,
 } from "./testimonal-list.css"
@@ -26,11 +26,14 @@ interface TestimonialProps {
   avatar: HomepageImage
   quote: string
   source: string
+  index: number
+  count: number
 }
 
 function Testimonial(props: TestimonialProps) {
+  const classes = props.index === props.count ? sliderTop : sliderBottom
   return (
-    <Box center>
+    <Box border center className={classes}>
       {props.avatar && (
         <Avatar alt={props.avatar.alt} image={props.avatar.gatsbyImageData} />
       )}
@@ -48,6 +51,16 @@ function Testimonial(props: TestimonialProps) {
   )
 }
 
+interface PointerProps {
+  index: number
+  count: number
+}
+
+function Pointer(props: PointerProps) {
+  const classes = props.index === props.count ? pointerStyle.active : pointerStyle.noActive
+  return <Box className={classes}></Box>
+}
+
 export interface TestimonialListProps {
   kicker?: string
   heading: string
@@ -59,13 +72,13 @@ export default function TestimonialList(props: TestimonialListProps) {
 
   useEffect(() => {
     setInterval(() => {
-      setCount((prevCount) => (prevCount < 3 ? prevCount + 1 : prevCount = 0 ))
+      setCount((prevCount) => (prevCount < 3 ? prevCount + 1 : (prevCount = 0)))
     }, 5000)
   }, [])
 
   return (
     <Section>
-      <Container className={relative}>
+      <Container>
         <Box center>
           <Heading>
             {props.kicker && <Kicker>{props.kicker}</Kicker>}
@@ -74,20 +87,22 @@ export default function TestimonialList(props: TestimonialListProps) {
         </Box>
         <Box center className={height}>
           {props.content.map((testimonial, index) => {
-            const classes = index === count ? sliderTop : sliderBottom
+            testimonial.index = index
+            testimonial.count = count
             return (
-              <Box
-                as="div"
-                key={testimonial.id + index}
-                padding={3}
-                border
-                className={classes}
-              >
+              <Box key={testimonial.id + index}>
                 <Testimonial {...testimonial} />
               </Box>
             )
           })}
         </Box>
+        <Flex variant="center">
+          {props.content.map((pointer, index) => {
+            pointer.index = index
+            pointer.count = count
+            return <Pointer key={pointer.id + index} {...pointer}></Pointer>
+          })}
+        </Flex>
       </Container>
     </Section>
   )
