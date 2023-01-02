@@ -15,10 +15,13 @@ import {
   HomepageImage,
 } from "./ui"
 import {
+  author,
   height,
   pointerStyle,
   sliderBottom,
   sliderTop,
+  wrapAvatar,
+  wrapPointer,
 } from "./testimonal-list.css"
 
 interface TestimonialProps {
@@ -33,18 +36,22 @@ interface TestimonialProps {
 function Testimonial(props: TestimonialProps) {
   const classes = props.index === props.count ? sliderTop : sliderBottom
   return (
-    <Box border center className={classes}>
+    <Box padding={4} center className={classes}>
       {props.avatar && (
-        <Avatar alt={props.avatar.alt} image={props.avatar.gatsbyImageData} />
+        <Box padding={3} className={wrapAvatar}>
+          <Avatar alt={props.avatar.alt} image={props.avatar.gatsbyImageData} />
+        </Box>
       )}
       <Blockquote>
         <Text as="p" variant="lead">
           {props.quote}
         </Text>
         <figcaption>
-          <Text as="cite" bold variant="caps">
-            {props.source}
-          </Text>
+          {props.source && (
+            <Text as="cite" bold variant="bold" className={author}>
+              {props.source}
+            </Text>
+          )}
         </figcaption>
       </Blockquote>
     </Box>
@@ -57,7 +64,8 @@ interface PointerProps {
 }
 
 function Pointer(props: PointerProps) {
-  const classes = props.index === props.count ? pointerStyle.active : pointerStyle.noActive
+  const classes =
+    props.index === props.count ? pointerStyle.active : pointerStyle.noActive
   return <Box className={classes}></Box>
 }
 
@@ -85,24 +93,26 @@ export default function TestimonialList(props: TestimonialListProps) {
             {props.heading}
           </Heading>
         </Box>
-        <Box center className={height}>
-          {props.content.map((testimonial, index) => {
-            testimonial.index = index
-            testimonial.count = count
-            return (
-              <Box key={testimonial.id + index}>
-                <Testimonial {...testimonial} />
-              </Box>
-            )
-          })}
+        <Box border>
+          <Box center className={height}>
+            {props.content.map((testimonial, index) => {
+              testimonial.index = index
+              testimonial.count = count
+              return (
+                <Box key={testimonial.id + index}>
+                  <Testimonial {...testimonial} />
+                </Box>
+              )
+            })}
+          </Box>
+          <Flex variant="center" className={wrapPointer}>
+            {props.content.map((pointer, index) => {
+              pointer.index = index
+              pointer.count = count
+              return <Pointer key={pointer.id + index} {...pointer}></Pointer>
+            })}
+          </Flex>
         </Box>
-        <Flex variant="center">
-          {props.content.map((pointer, index) => {
-            pointer.index = index
-            pointer.count = count
-            return <Pointer key={pointer.id + index} {...pointer}></Pointer>
-          })}
-        </Flex>
       </Container>
     </Section>
   )

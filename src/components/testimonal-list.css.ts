@@ -22,8 +22,12 @@ export const sliderBottom = style({
 })
 
 export const height = style({
-  height: "10rem",
+  height: "12rem",
   position: "relative",
+})
+
+export const wrapPointer = style({
+  padding: "32px",
 })
 
 const pointerBase = style({
@@ -37,4 +41,14 @@ const pointerBase = style({
 export const pointerStyle = styleVariants({
   active: [pointerBase],
   noActive: [pointerBase, { opacity: 0.5 }],
+})
+
+export const wrapAvatar = style({
+  paddingTop: "0",
+})
+
+export const author = style({
+  ":before": {
+    content: "- ",
+  },
 })
