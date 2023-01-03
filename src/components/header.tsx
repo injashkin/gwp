@@ -133,7 +133,7 @@ export default function Header(props) {
                     node.childItems.nodes.length > 0 && (
                       <NavItemGroup
                         name={node.label}
-                        navItems={props.data.allWpMenuItem.nodes}
+                        navItems={node.childItems.nodes}
                       ></NavItemGroup>
                     )
                   ))
@@ -214,6 +214,24 @@ export const query = graphql`
             url
             label
             description
+            childItems {
+              nodes {
+                id
+                uri
+                url
+                label
+                description
+                childItems {
+                  nodes {
+                    id
+                    uri
+                    url
+                    label
+                    description
+                  }
+                }
+              }
+            }
           }
         }
       }

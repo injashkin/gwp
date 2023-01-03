@@ -12,18 +12,21 @@ import Caret from "./caret"
 import * as styles from "./nav-item-group.css"
 import { media } from "./ui.css"
 
+
 export type NavItemGroupNavItem = {
   id: string
-  href: string
+  url: string
   icon: HomepageImage
-  text: string
+  label: string
   description?: string
+  childItems?: any
 }
 
 interface NavItemGroupProps {
   name: string
   navItems: NavItemGroupNavItem[]
 }
+
 
 export default function NavItemGroup({ name, navItems }: NavItemGroupProps) {
   const [isOpen, setIsOpen] = React.useState(false)
@@ -36,7 +39,7 @@ export default function NavItemGroup({ name, navItems }: NavItemGroupProps) {
       setIsOpen(true)
       setPopupVisible(true)
     } else {
-      // ensures that sub-menu closes when no animation is available
+      // гарантирует, что подменю закрывается, когда анимация недоступна
       if (isSmallScreen()) {
         setIsOpen(false)
       }
@@ -45,7 +48,7 @@ export default function NavItemGroup({ name, navItems }: NavItemGroupProps) {
   }, [isOpen])
 
   React.useEffect(() => {
-    // crude implementation of animating the popup without a library
+    // грубая реализация анимации всплывающего окна без библиотеки
     const popupBox = document.querySelector(`[data-id="${name}-popup-box"]`)
     const onAnimationEnd = ({ animationName }) => {
       if (animationName === `zoomOutDown`) {
@@ -61,7 +64,7 @@ export default function NavItemGroup({ name, navItems }: NavItemGroupProps) {
   }, [isOpen, name])
 
   React.useEffect(() => {
-    // hide menu when clicked outside
+    // скрыть меню при нажатии за пределами меню
     const handleClickOutside = (event) => {
       const wrapper = document.querySelector(
         `[data-id="${name}-group-wrapper"]`
@@ -110,31 +113,38 @@ export default function NavItemGroup({ name, navItems }: NavItemGroupProps) {
             gap={2}
             className={styles.navLinkListWrapperInner}
           >
-            {navItems.map((navItem) => (
-              <li key={navItem.id}>
-                <NavLink to={navItem.href} className={styles.navLinkListLink}>
-                  <Flex variant="start" gap={3}>
-                    {navItem.icon && (
-                      <GatsbyImage
-                        alt={navItem.icon.alt}
-                        image={getImage(navItem.icon.gatsbyImageData)}
-                        className={styles.navIcon}
-                      />
-                    )}
-                    <Flex variant="columnStart" marginY={1} gap={0}>
-                      <Box as="span" className={styles.navLinkTitle}>
-                        {navItem.text}
-                      </Box>
-                      {!!navItem.description && (
-                        <Box as="p" className={styles.navLinkDescription}>
-                          {navItem.description}
-                        </Box>
+            {navItems.map((navItem) =>
+              navItem.childItems && navItem.childItems.nodes.length > 0  ? (
+                <NavItemGroup
+                    name={navItem.label}
+                    navItems={navItem.childItems.nodes}
+                ></NavItemGroup>
+              ) : (
+                <li key={navItem.id}>
+                  <NavLink to={navItem.url} className={styles.navLinkListLink}>
+                    <Flex variant="start" gap={3}>
+                      {navItem.icon && (
+                        <GatsbyImage
+                          alt={navItem.icon.alt}
+                          image={getImage(navItem.icon.gatsbyImageData)}
+                          className={styles.navIcon}
+                        />
                       )}
+                      <Flex variant="columnStart" marginY={1} gap={0}>
+                        <Box as="span" className={styles.navLinkTitle}>
+                          {navItem.label}
+                        </Box>
+                        {!!navItem.description && (
+                          <Box as="p" className={styles.navLinkDescription}>
+                            {navItem.description}
+                          </Box>
+                        )}
+                      </Flex>
                     </Flex>
-                  </Flex>
-                </NavLink>
-              </li>
-            ))}
+                  </NavLink>
+                </li>
+              )
+            )}
           </FlexList>
         </Box>
       )}
