@@ -50,6 +50,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       blocktype: String
     }
+
+    interface HomeLink implements Node {
+      id: ID!
+      url: String
+      title: String
+    }
   `)
 
   // blocks
@@ -103,6 +109,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       heading: String
       text: String
       image: HomepageImage @link
+      icon: String
     }
 
     type HomepageLogo implements Node {

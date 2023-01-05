@@ -22,6 +22,7 @@ export interface HomepageLink {
 }
 
 export interface HomeLink {
+  id: string
   url: string
   title: string
 }

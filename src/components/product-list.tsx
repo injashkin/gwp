@@ -43,7 +43,7 @@ function Product(props: ProductProps) {
         <Subhead>{props.heading}</Subhead>
         {props.text && <Text>{props.text}</Text>}
         <LinkList links={props.links} />
-        <Button href={props.link.url}>Подробности</Button>
+        {props.link && <Button href={props.link.url}>Подробности</Button>}
       </Box>
     </Box>
   )
@@ -94,7 +94,6 @@ export const query = graphql`
       text
       link {
         url
-        title
       }
       image {
         alt

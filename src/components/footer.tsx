@@ -174,7 +174,7 @@ export default function Footer() {
   return (
     <Box as="footer" paddingY={4}>
       <Container>
-        <Flex gap={4} variant="centerNoWrap">
+        <Flex gap={4} variant="start" responsive>
           <Box width="third">
             <Subhead className={underline}>{"Название компании"}</Subhead>
             <Text as="p">

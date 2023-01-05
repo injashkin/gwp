@@ -12,6 +12,7 @@ import {
   HomepageImage,
   NavLink,
   FixedBGI,
+  HomeLink,
 } from "./ui"
 import {
   backgroundIcon,
@@ -28,14 +29,14 @@ interface BenefitProps {
   icon: string
   heading: string
   text: string
-  link: { url: string }
+  link: HomeLink
 }
 
 function Benefit(props: BenefitProps) {
   const FeatherIcon = I[props.icon]
   return (
     <Box as="li" width="third" padding={4} paddingY={3}>
-      <NavLink to={props.link.url}>
+      {props.link && <NavLink to={props.link.url}>
         <Box center className={hoverBenefit}>
           {props.image && (
             <Icon
@@ -54,7 +55,7 @@ function Benefit(props: BenefitProps) {
           </Heading>
           <Text className={colorText}>{props.text}</Text>
         </Box>
-      </NavLink>
+      </NavLink>}
     </Box>
   )
 }
@@ -98,7 +99,9 @@ export const query = graphql`
     heading
     text
     image {
+      id
       url
+      alt
     }
     content {
       id
@@ -107,6 +110,7 @@ export const query = graphql`
       text
       link {
         url
+        title
       }
     }
   }

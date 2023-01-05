@@ -132,6 +132,7 @@ export default function Header(props) {
                   ) : (
                     node.childItems.nodes.length > 0 && (
                       <NavItemGroup
+                        key={node.id}
                         name={node.label}
                         navItems={node.childItems.nodes}
                       ></NavItemGroup>

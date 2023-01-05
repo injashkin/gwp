@@ -36,6 +36,7 @@
   },
   "scripts": {
     "dev": "gatsby clean && gatsby develop",
+    "prod": "gatsby clean && gatsby build",
     "start": "gatsby develop",
     "develop": "gatsby develop",
     "build": "gatsby build",

@@ -22,14 +22,16 @@ interface ClientProps {
 
 export function Client(props: ClientProps) {
   return (
-    <Box>
-      {props.image && (
-        <GatsbyImage
-          alt={props.image.alt}
-          image={props.image.gatsbyImageData}
-        />
-      )}
-    </Box>
+    <li>
+      <Box>
+        {props.image && (
+          <GatsbyImage
+            alt={props.image.alt}
+            image={props.image.gatsbyImageData}
+          />
+        )}
+      </Box>
+    </li>
   )
 }
 
@@ -45,25 +47,21 @@ export default function ClientList(props: ClientListProps) {
     ? props.image.url
     : "http://2166.wp.shabloner.ru/themes/shabloner_2166/files/ct_block_102803_image.jpg"
   return (
-    <Section>
-      <FixedBGI background="primary" url={url}>
+    <FixedBGI as="section" background="primary" url={url}>
       <Box className={opasity}>
         <Container>
           <Box center>
-            <Heading>{props.heading}</Heading>
-            <Text>{props.text}</Text>
+            {props.heading && <Heading>{props.heading}</Heading>}
+            {props.text && <Text>{props.text}</Text>}
           </Box>
           <FlexList gap={5}>
             {props.content.map((client) => (
-              <li key={client.id}>
-                <Client {...client} />
-              </li>
+              <Client key={client.id} {...client} />
             ))}
           </FlexList>
         </Container>
-        </Box>
-      </FixedBGI>
-    </Section>
+      </Box>
+    </FixedBGI>
   )
 }
 
@@ -74,11 +72,15 @@ export const query = graphql`
     text
     image {
       url
+      alt
     }
     content {
+      id
       image {
+        id
         url
         gatsbyImageData
+        alt
       }
     }
   }

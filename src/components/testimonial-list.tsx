@@ -70,6 +70,7 @@ function Pointer(props: PointerProps) {
 export interface TestimonialListProps {
   kicker?: string
   heading: string
+  text?: string
   content: TestimonialProps[]
 }
 
@@ -90,6 +91,7 @@ export default function TestimonialList(props: TestimonialListProps) {
             {props.kicker && <Kicker>{props.kicker}</Kicker>}
             {props.heading}
           </Heading>
+          <Text>{props.text}</Text>
         </Box>
         <Box border>
           <Box center className={height}>
@@ -121,6 +123,7 @@ export const query = graphql`
     id
     kicker
     heading
+    text
     content {
       id
       quote
