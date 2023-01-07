@@ -1,4 +1,87 @@
-## Box
+## Компоненты Gatsby
+
+### Slice
+
+Смотри:
+
+- [Gatsby Slice API](https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-slice/).
+- [Using Slices](https://www.gatsbyjs.com/docs/how-to/performance/using-slices/)
+- [Using Gatsby Slice API with TypeScript]
+- [Enable Slices API Optimizations]
+
+Компонент <Slice> используется как заменитель фрагмента кода, который будет вставлен на место компонента <Slice>. В этом проекте компонент <Slice> вызывается в файле src/components/layout.tsx. При вызове <Slice> требуется указывать свойство `alias`:
+
+```jsx
+<Slice alias="unique-name" />
+```
+
+Алиас однозначно определяет, какой фрагмент кода будет вызван на место компонента <Slice>. 
+
+Для компонента <Slice> в качестве фрагмента можно указать любой компонент. Для этого в конце файла gatsby-node.js для каждого фрагмента вызывается экшен `createSlice` в API `createPages`. С помощью ключа `component` указывается путь к компоненту, который используется в качестве фрагмента, а с помощью ключа `id` присваивается компоненту уникальный идентификатор:
+
+```js
+exports.createPages = ({ actions }) => {
+  const { createSlice } = actions
+  createSlice({
+    id: "header",
+    component: require.resolve("./src/components/header.tsx"),
+  })
+  createSlice({
+    id: "footer",
+    component: require.resolve("./src/components/footer.tsx"),
+  })
+}
+```
+
+Компоненту <Slice> помимо свойства `alias` можно передавать любые другие свойства:
+
+```jsx
+ <Slice alias="unique-name" additionalProp="hello world" />
+```
+
+Эти дополнительные свойства будут переданы тому компоненту, который используется в качестве фрагмента. Путь к нему указан в свойстве `component` экшена `createSlice`.
+
+При создании фрагмента можно передавать данные компоненту фрагмента с помощью ключа `context`:
+
+```js
+  createSlice({
+    id: "footer",
+    context: {
+      heading: "Обратная связь",
+    },
+    component: require.resolve("./src/components/footer.tsx"),
+
+  })
+```
+
+Данные, переданные здесь в `context`, будут переданы компоненту `Footer` с помощью свойства `sliceContext`.
+
+```js
+export default function Footer({ sliceContext }) {
+  return (
+    <Box width="third">
+      <Subhead className={underline}>{sliceContext.heading}</Subhead>
+      <Feedback></Feedback>
+    </Box>
+  )
+}
+```
+
+В файле src/components/layout.tsx компонент <Slice> вызывается в двух местах:
+
+```jsx
+    <>
+      <Slice alias="header" />
+      {children}
+      <Slice alias="footer" />
+    </>
+```
+
+---
+
+## 
+
+### Box
 
 Создает блок <div></div>
 
@@ -31,7 +114,7 @@
 
 ---
 
-## Section
+### Section
 
 Создает блок <section></section>, который по умолчанию имеет следующие CSS свойства:
 
@@ -50,7 +133,7 @@ width: 100%;
 
 ---
 
-## Space
+### Space
 
 ```jsx
 <Space />
@@ -65,7 +148,7 @@ width: 100%;
 
 ---
 
-## Container
+### Container
 
 Создает блок div с указанной шириной и отцентрованный по горизонтали
 
@@ -80,7 +163,7 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 
 ---
 
-## Flex
+### Flex
 
 Создает флекс контейнер с тегом <div>.
 
@@ -121,7 +204,7 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 
 ---
 
-## FlexList
+### FlexList
 
 Создает флекс контейнер с тегом <ul>.
 
@@ -132,7 +215,7 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 Чтобы создать обычный контейнер (не флекс) с тегом <ul>, существует компонент <>.
 ---
 
-## Text
+### Text
 
 <Text as="h1" center></Text>
 <Text variant="lead" bold></Text>
@@ -167,7 +250,7 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 
 ---
 
-## SuperHeading, Heading, Subhead и Kicker
+### SuperHeading, Heading, Subhead и Kicker
 
 <Heading center></Heading>
 
@@ -186,13 +269,13 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 
 ---
 
-## GatsbyImage
+### GatsbyImage
 
 Является компонентом плагина [gatsby-plugin-image](https://www.gatsbyjs.com/plugins/gatsby-plugin-image/).
 
 <GatsbyImage alt={props.image.alt} image={getImage(props.image.gatsbyImageData)} className={desktopHeroBottomLayer} />
 
-## Avatar, Logo, Icon
+### Avatar, Logo, Icon
 
 <Icon alt={props.image.alt} image={props.image.gatsbyImageData} size="large" />
 
@@ -204,7 +287,7 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 
 ---
 
-## NavLink
+### NavLink
 
 Превращает дочерний компонент в ссылку. В качестве свойства для задания URL можно использовать `to` или `href`.
 
@@ -220,11 +303,11 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 
 ---
 
-## NavButtonLink
+### NavButtonLink
 
 ---
 
-## FixedBGI
+### FixedBGI
 
 Создает блок с фиксированным фоновым изображением
 
@@ -239,3 +322,4 @@ fullbleed - то же, что и normal плюс удвоенные падинг
 - `as` - Задает тег элементу. По умолчанию `as="div"`
 
 Можно задавать те же свойста, что и компоненту `Box`
+
