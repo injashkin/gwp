@@ -671,6 +671,9 @@ exports.createPages = ({ actions }) => {
   })
   createSlice({
     id: "footer",
+    context: {
+      heading: "Контакты",
+    },
     component: require.resolve("./src/components/footer.tsx"),
   })
 }

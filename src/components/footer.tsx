@@ -25,6 +25,7 @@ import {
 import BrandLogo from "./brand-logo"
 import { underline } from "./footer.css"
 import Feedback from "./feedback"
+import { graphql } from "gatsby"
 
 const socialMedia = {
   TWITTER: {
@@ -81,7 +82,7 @@ interface FooterData {
   contacts: { id: string; icon: JSX.Element; contact: string }[]
 }
 
-const data: FooterData = {
+const datas: FooterData = {
   links: [
     {
       id: "0",
@@ -168,8 +169,8 @@ const data: FooterData = {
   copyright: "© 2022 Gatsby Inc. All rights reserved",
 }
 
-export default function Footer() {
-  const { links, meta, socialLinks, copyright, contacts } = data
+export default function Footer({ data, sliceContext }) {
+  const { links, meta, socialLinks, copyright, contacts } = datas
 
   return (
     <Box as="footer" paddingY={4}>
@@ -183,11 +184,14 @@ export default function Footer() {
             </Text>
           </Box>
           <Box width="third">
-            <Subhead className={underline}>Обратная связь</Subhead>
-            <Feedback></Feedback>
+            <Subhead className={underline}>
+              {" "}
+              {data.wpPage.feedback.newGroup.heading}
+            </Subhead>
+            <Feedback data={data}></Feedback>
           </Box>
           <Box width="third">
-            <Subhead className={underline}>Контакты</Subhead>
+            <Subhead className={underline}>{sliceContext.heading}</Subhead>
             {contacts &&
               contacts.map((item) => {
                 return (
@@ -254,3 +258,26 @@ export default function Footer() {
     </Box>
   )
 }
+
+export const query = graphql`
+  {
+    wpPage(uri: { eq: "/" }) {
+      feedback {
+        newGroup {
+          intro
+          heading
+          placeholderName
+          placeholderPhone
+          outro
+          link {
+            title
+            url
+            target
+          }
+          buttonText
+          fieldGroupName
+        }
+      }
+    }
+  }
+`

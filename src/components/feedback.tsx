@@ -2,42 +2,42 @@ import * as React from "react"
 import { formControl, button } from "./feedback.css"
 import { Box, NavLink, Text } from "./ui"
 
-export default function Feedback() {
+export default function Feedback({ data }) {
   return (
     <Box>
-      <Text as="p">
-        Оставьте заявку и наши менеджеры свяжутся с вами в течении 15 минут
-      </Text>
+      <Text as="p">{data.wpPage.feedback.newGroup.intro}</Text>
       <Box as="form">
         <Box paddingY={2}>
           <input
             type="text"
-            placeholder="* Имя:"
+            placeholder={data.wpPage.feedback.newGroup.placeholderName}
             className={formControl}
           ></input>
         </Box>
         <Box paddingY={2}>
           <input
             type="text"
-            placeholder="* Телефон:"
+            placeholder={data.wpPage.feedback.newGroup.placeholderPhone}
             className={formControl}
           ></input>
         </Box>
       </Box>
       <Box paddingY={3}>
         <Text as="small">
-          Отправляя данную форму, вы соглашаетесь c{" "}
+          {data.wpPage.feedback.newGroup.outro}{" "}
           {
             <NavLink
-              target="_blank"
-              to="http://2166.wp.shabloner.ru/politika-konfidencialnosti?no_bottom=1"
+              target={data.wpPage.feedback.newGroup.link.target}
+              to={data.wpPage.feedback.newGroup.link.url}
             >
-              Политикой конфиденциальности
+              {data.wpPage.feedback.newGroup.link.title}
             </NavLink>
           }
         </Text>
       </Box>
-      <button type="submit" className={button}>Отправить</button>
+      <button type="submit" className={button}>
+      {data.wpPage.feedback.newGroup.buttonText}
+      </button>
     </Box>
   )
 }
