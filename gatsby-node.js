@@ -672,7 +672,7 @@ exports.createPages = ({ actions }) => {
   createSlice({
     id: "footer",
     context: {
-      heading: "Контакты",
+      license: "Перепечатка, а равно и использование материалов данного сайта разрешается только по согласию с владельцем.",
     },
     component: require.resolve("./src/components/footer.tsx"),
   })

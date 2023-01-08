@@ -36,6 +36,7 @@ export const query = graphql`
     heading
     text
     links {
+      id
       href
       text
     }

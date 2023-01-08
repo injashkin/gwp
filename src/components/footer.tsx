@@ -80,7 +80,7 @@ interface FooterData {
   meta: { id: string; href: string; text: string }[]
   copyright: string
   socialLinks: { id: string; service: string; username: string }[]
-  contacts: { id: string; icon: JSX.Element; contact: string }[]
+  //contacts: { id: string; icon: JSX.Element; contact: string }[]
 }
 
 const datas: FooterData = {
@@ -150,28 +150,11 @@ const datas: FooterData = {
       username: "gatsbyjs",
     },
   ],
-  contacts: [
-    {
-      id: "0",
-      icon: <Phone />,
-      contact: "+7 (123) 456 78 90",
-    },
-    {
-      id: "1",
-      icon: <MapPin />,
-      contact: "ул Терская, 217, офис 123",
-    },
-    {
-      id: "2",
-      icon: <Mail />,
-      contact: "mail@mail.ru",
-    },
-  ],
   copyright: "© 2022 Gatsby Inc. All rights reserved",
 }
 
 export default function Footer({ data, sliceContext }) {
-  const { links, meta, socialLinks, copyright, contacts } = datas
+  const { links, meta, socialLinks, copyright } = datas
 
   return (
     <Box as="footer" paddingY={4}>
@@ -181,13 +164,7 @@ export default function Footer({ data, sliceContext }) {
             <Subhead className={underline}>{"Название компании"}</Subhead>
             <Text as="p">{sliceContext.license}</Text>
           </Box>
-          <Box width="third">
-            <Subhead className={underline}>
-              {" "}
-              {data.wpPage.feedback.newGroup.heading}
-            </Subhead>
-            <Feedback data={data}></Feedback>
-          </Box>
+          <Feedback props={data}></Feedback>
           <Contacts props={data}></Contacts>
         </Flex>
       </Container>
@@ -248,20 +225,17 @@ export const query = graphql`
   {
     wpPage(uri: { eq: "/" }) {
       feedback {
-        newGroup {
-          intro
-          heading
-          placeholderName
-          placeholderPhone
-          outro
-          link {
-            title
-            url
-            target
-          }
-          buttonText
-          fieldGroupName
+        intro
+        heading
+        placeholderName
+        placeholderPhone
+        outro
+        link {
+          title
+          url
+          target
         }
+        buttonText
       }
       contacts {
         heading
