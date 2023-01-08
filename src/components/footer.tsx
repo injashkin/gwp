@@ -26,6 +26,7 @@ import BrandLogo from "./brand-logo"
 import { underline } from "./footer.css"
 import Feedback from "./feedback"
 import { graphql } from "gatsby"
+import Contacts from "./contacts"
 
 const socialMedia = {
   TWITTER: {
@@ -178,10 +179,7 @@ export default function Footer({ data, sliceContext }) {
         <Flex gap={4} variant="start" responsive>
           <Box width="third">
             <Subhead className={underline}>{"Название компании"}</Subhead>
-            <Text as="p">
-              Перепечатка, а равно и использование материалов данного сайта
-              разрешается только по согласию с владельцем.
-            </Text>
+            <Text as="p">{sliceContext.license}</Text>
           </Box>
           <Box width="third">
             <Subhead className={underline}>
@@ -190,20 +188,7 @@ export default function Footer({ data, sliceContext }) {
             </Subhead>
             <Feedback data={data}></Feedback>
           </Box>
-          <Box width="third">
-            <Subhead className={underline}>{sliceContext.heading}</Subhead>
-            {contacts &&
-              contacts.map((item) => {
-                return (
-                  <Flex key={item.id} variant="start">
-                    <>
-                      {item.icon}
-                      <Text as="p">{item.contact}</Text>
-                    </>
-                  </Flex>
-                )
-              })}
-          </Box>
+          <Contacts props={data}></Contacts>
         </Flex>
       </Container>
       <Container>
@@ -276,6 +261,21 @@ export const query = graphql`
           }
           buttonText
           fieldGroupName
+        }
+      }
+      contacts {
+        heading
+        address {
+          contact
+          icon
+        }
+        email {
+          contact
+          icon
+        }
+        phone {
+          contact
+          icon
         }
       }
     }
