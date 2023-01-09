@@ -14,7 +14,7 @@ import {
   HomepageLink,
   FixedBGI,
 } from "./ui"
-import { opasity } from "./ui.css"
+import { hr, opasity } from "./ui.css"
 
 interface StatProps {
   id: string
@@ -64,6 +64,7 @@ export default function StatList(props: StatListProps) {
                   {props.heading}
                 </Heading>
                 {props.text && <Text variant="lead">{props.text}</Text>}
+                <hr className={hr} />
                 <FlexList wrap gap={4}>
                   {props.content.map((stat) => (
                     <li key={stat.id}>

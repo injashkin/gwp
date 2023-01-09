@@ -1,8 +1,9 @@
 import * as React from "react"
 import { useEffect } from "react"
 import { graphql } from "gatsby"
-import { map } from "./map-yandex.css"
-import { Container, Section, Subhead, Text } from "./ui"
+import { map, section } from "./map-yandex.css"
+import { Box, Container, Section, Subhead, Text } from "./ui"
+import { hr } from "./ui.css"
 
 const useScript = (url: string) => {
   useEffect(() => {
@@ -31,16 +32,17 @@ export interface MapYandexProps {
 export default function MapYandex(props: MapYandexProps) {
   useScript(props.link)
   return (
-    <>
+    <Section className={section}>
       <Container>
-        <Section center>
+        <Box center>
           <Subhead>{props.heading}</Subhead>
           <Text>{props.text}</Text>
-        </Section>
+        </Box>
+        <hr className={hr} />
       </Container>
 
       <div id="map-widget" className={map}></div>
-    </>
+    </Section>
   )
 }
 

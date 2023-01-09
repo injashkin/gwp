@@ -21,7 +21,7 @@ import {
   colorText,
 } from "./benefit-list.css"
 import * as I from "react-feather"
-import { opasity } from "./ui.css"
+import { hr, opasity } from "./ui.css"
 
 interface BenefitProps {
   id: string
@@ -80,6 +80,7 @@ export default function BenefitList(props: BenefitListProps) {
               {props.heading && <Heading>{props.heading}</Heading>}
               {props.text && <Text variant="lead">{props.text}</Text>}
             </Box>
+            <hr className={hr} />
             <Space size={3} />
             <FlexList gutter={3} variant="start" responsive wrap>
               {props.content.map((benefit) => (

@@ -12,7 +12,7 @@ import {
   Text,
 } from "./ui"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { opasity } from "./ui.css"
+import { hr, opasity } from "./ui.css"
 
 interface ClientProps {
   id: string
@@ -54,6 +54,7 @@ export default function ClientList(props: ClientListProps) {
             {props.heading && <Heading>{props.heading}</Heading>}
             {props.text && <Text>{props.text}</Text>}
           </Box>
+          <hr className={hr} />
           <FlexList gap={5}>
             {props.content.map((client) => (
               <Client key={client.id} {...client} />

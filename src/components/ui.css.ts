@@ -687,3 +687,10 @@ export const opasity = style({
   paddingTop: "60px",
   paddingBottom: "60px",
 })
+
+export const hr = style({
+  width: "40px",
+  border: "solid 1px",
+  marginBottom: "50px",
+  marginTop: "30px",
+})

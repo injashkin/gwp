@@ -1,5 +1,6 @@
 import { style, styleVariants } from "@vanilla-extract/css"
 import { colors } from "../colors.css"
+import { theme } from "../theme.css"
 
 const slideBase = style({
   position: "absolute",
@@ -44,4 +45,8 @@ export const author = style({
   ":before": {
     content: "- ",
   },
+})
+
+export const slider = style({
+  marginBottom: theme.space[4],
 })

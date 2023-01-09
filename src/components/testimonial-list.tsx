@@ -18,9 +18,11 @@ import {
   height,
   pointerStyle,
   slide,
+  slider,
   wrapAvatar,
   wrapPointer,
 } from "./testimonal-list.css"
+import { hr } from "./ui.css"
 
 interface TestimonialProps {
   id: string
@@ -70,7 +72,6 @@ function Pointer(props: PointerProps) {
 export interface TestimonialListProps {
   kicker?: string
   heading: string
-  text?: string
   content: TestimonialProps[]
 }
 
@@ -91,9 +92,9 @@ export default function TestimonialList(props: TestimonialListProps) {
             {props.kicker && <Kicker>{props.kicker}</Kicker>}
             {props.heading}
           </Heading>
-          <Text>{props.text}</Text>
+          <hr className={hr} />
         </Box>
-        <Box border>
+        <Box className={slider} border>
           <Box center className={height}>
             {props.content.map((testimonial, index) => {
               testimonial.index = index
@@ -123,7 +124,6 @@ export const query = graphql`
     id
     kicker
     heading
-    text
     content {
       id
       quote
