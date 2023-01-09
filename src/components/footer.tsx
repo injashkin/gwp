@@ -6,9 +6,6 @@ import {
   Facebook,
   Youtube,
   GitHub,
-  Phone,
-  MapPin,
-  Mail,
 } from "react-feather"
 import {
   Container,
@@ -238,7 +235,7 @@ export const query = graphql`
         buttonText
       }
       contacts {
-        heading
+        heading2
         address {
           contact
           icon

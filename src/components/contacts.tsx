@@ -16,10 +16,10 @@ function Contact({ props }) {
 }
 
 export default function Contacts({ props }) {
-  const { heading, phone, address, email } = props.wpPage.contacts
+  const { heading2, phone, address, email } = props.wpPage.contacts
   return (
     <Box width="third">
-      <Subhead className={underline}>{heading}</Subhead>
+      <Subhead className={underline}>{heading2}</Subhead>
       <Contact props={phone}></Contact>
       <Contact props={address}></Contact>
       <Contact props={email}></Contact>
