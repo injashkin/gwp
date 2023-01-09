@@ -4,6 +4,7 @@ import {
   Box,
   Container,
   FixedBGI,
+  Flex,
   FlexList,
   Heading,
   HomepageImage,
@@ -13,6 +14,7 @@ import {
 } from "./ui"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { hr, opasity } from "./ui.css"
+import { clientItem, clientsWrap, dot, slide } from "./client-list.css"
 
 interface ClientProps {
   id: string
@@ -22,16 +24,14 @@ interface ClientProps {
 
 export function Client(props: ClientProps) {
   return (
-    <li>
-      <Box>
-        {props.image && (
-          <GatsbyImage
-            alt={props.image.alt}
-            image={props.image.gatsbyImageData}
-          />
-        )}
-      </Box>
-    </li>
+    <Box className={clientItem}>
+      {props.image && (
+        <GatsbyImage
+          alt={props.image.alt}
+          image={props.image.gatsbyImageData}
+        />
+      )}
+    </Box>
   )
 }
 
@@ -55,11 +55,17 @@ export default function ClientList(props: ClientListProps) {
             {props.text && <Text>{props.text}</Text>}
           </Box>
           <hr className={hr} />
-          <FlexList gap={5}>
-            {props.content.map((client) => (
-              <Client key={client.id} {...client} />
-            ))}
-          </FlexList>
+          <Box className={slide}>
+            <Box className={clientsWrap}>
+              {props.content.map((client) => (
+                <Client key={client.id} {...client} />
+              ))}
+            </Box>
+          </Box>
+          <Flex variant="center">
+            <Box className={dot}></Box>
+            <Box  className={dot}></Box>
+          </Flex>
         </Container>
       </Box>
     </FixedBGI>
