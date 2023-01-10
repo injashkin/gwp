@@ -1,10 +1,8 @@
 import { style, styleVariants } from "@vanilla-extract/css"
-import { colors } from "../colors.css"
 import { theme } from "../theme.css"
 
 const slideBase = style({
   position: "absolute",
-
   transitionProperty: "opacity",
   transitionDuration: "0.3s",
   transitionTimingFunction: "ease-in-out",
@@ -24,17 +22,17 @@ export const wrapPointer = style({
   padding: "32px",
 })
 
-const pointerBase = style({
-  backgroundColor: `${colors.primary}`,
-  border: `1px solid ${colors.primary}`,
+const dotBase = style({
+  backgroundColor: theme.colors.primary,
+  border: `1px solid ${theme.colors.primary}`,
   width: "10px",
   height: "10px",
   borderRadius: "50%",
 })
 
-export const pointerStyle = styleVariants({
-  active: [pointerBase],
-  noActive: [pointerBase, { opacity: 0.5 }],
+export const dot = styleVariants({
+  active: [dotBase],
+  passive: [dotBase, { opacity: 0.5 }],
 })
 
 export const wrapAvatar = style({

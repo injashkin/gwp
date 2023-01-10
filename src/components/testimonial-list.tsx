@@ -15,8 +15,8 @@ import {
 } from "./ui"
 import {
   author,
+  dot,
   height,
-  pointerStyle,
   slide,
   slider,
   wrapAvatar,
@@ -65,7 +65,7 @@ interface PointerProps {
 
 function Pointer(props: PointerProps) {
   const classes =
-    props.index === props.count ? pointerStyle.active : pointerStyle.noActive
+    props.index === props.count ? dot.active : dot.passive
   return <Box className={classes}></Box>
 }
 
