@@ -5,16 +5,15 @@ import {
   Container,
   FixedBGI,
   Flex,
-  FlexList,
   Heading,
   HomepageImage,
   HomepageLink,
-  Section,
   Text,
 } from "./ui"
 import { GatsbyImage } from "gatsby-plugin-image"
 import { hr, opasity } from "./ui.css"
-import { clientItem, clientsWrap, dot, slide } from "./client-list.css"
+import { clientItem, dot, slide, visible } from "./client-list.css"
+import { useState } from "react"
 
 interface ClientProps {
   id: string
@@ -43,6 +42,22 @@ export interface ClientListProps {
 }
 
 export default function ClientList(props: ClientListProps) {
+  const [dot1, setDot1] = useState(dot.active);
+  const [dot2, setDot2] = useState(dot.passive);
+  const [currentSlide, setCurrentSlide] = useState(slide.one);
+
+  function selectSlide1() {
+    setDot1(dot.active)
+    setDot2(dot.passive)
+    setCurrentSlide(slide.one)
+  }
+
+  function selectSlide2() {
+    setDot2(dot.active)
+    setDot1(dot.passive)
+    setCurrentSlide(slide.two)
+  }
+
   const url = props.image
     ? props.image.url
     : "http://2166.wp.shabloner.ru/themes/shabloner_2166/files/ct_block_102803_image.jpg"
@@ -55,17 +70,17 @@ export default function ClientList(props: ClientListProps) {
             {props.text && <Text>{props.text}</Text>}
           </Box>
           <hr className={hr} />
-          <Box className={slide}>
-            <Box className={clientsWrap}>
+          <Box className={visible}>
+            <Box className={currentSlide}>
               {props.content.map((client) => (
                 <Client key={client.id} {...client} />
               ))}
             </Box>
           </Box>
-          <Flex variant="center">
-            <Box className={dot}></Box>
-            <Box  className={dot}></Box>
-          </Flex>
+            <Flex variant="center">
+              <div onClick={selectSlide1} className={dot1}></div>
+              <div onClick={selectSlide2} className={dot2}></div>
+            </Flex>
         </Container>
       </Box>
     </FixedBGI>
