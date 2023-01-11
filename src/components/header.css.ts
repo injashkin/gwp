@@ -17,6 +17,14 @@ export const desktopHeaderNavWrapper = style({
   },
 })
 
+export const nav = style({
+  color: theme.colors.background,
+})
+
+export const navItem = style({
+  ":hover": { color: theme.colors.primary },
+})
+
 const mobileHeaderNavWrapperBase = style({
   display: "block",
   position: "relative",

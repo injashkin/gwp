@@ -18,6 +18,8 @@ import {
   desktopHeaderNavWrapper,
   mobileHeaderNavWrapper,
   mobileNavSVGColorWrapper,
+  nav,
+  navItem,
 } from "./header.css"
 import BrandLogo from "./brand-logo"
 import NavItemGroup from "./nav-item-group"
@@ -113,38 +115,38 @@ export default function Header(props) {
 
   return (
     <header>
-      <Container className={desktopHeaderNavWrapper}>
-        <Space size={2} />
-        <Flex variant="spaceBetween">
-          <NavLink to="/">
-            <VisuallyHidden>Home</VisuallyHidden>
-            <BrandLogo />
-          </NavLink>
-          <nav>
-            <FlexList gap={4}>
-              {props.data.allWpMenuItem.nodes.map(
-                (node) =>
-                  node.parentId === null &&
-                  (node.childItems.nodes.length === 0 ? (
-                    <li key={node.id}>
-                      <NavLink to={node.uri}>{node.label}</NavLink>
-                    </li>
-                  ) : (
-                    node.childItems.nodes.length > 0 && (
-                      <NavItemGroup
-                        key={node.id}
-                        name={node.label}
-                        navItems={node.childItems.nodes}
-                      ></NavItemGroup>
-                    )
-                  ))
-              )}
-            </FlexList>
-          </nav>
+        <Container className={desktopHeaderNavWrapper}>
+          <Space size={2} />
+          <Flex variant="spaceBetween">
+            <NavLink to="/">
+              <VisuallyHidden>Home</VisuallyHidden>
+              <BrandLogo />
+            </NavLink>
+            <nav>
+              <FlexList className={nav} gap={4}>
+                {props.data.allWpMenuItem.nodes.map(
+                  (node) =>
+                    node.parentId === null &&
+                    (node.childItems.nodes.length === 0 ? (
+                      <li key={node.id}>
+                        <NavLink className={navItem} to={node.uri}>{node.label}</NavLink>
+                      </li>
+                    ) : (
+                      node.childItems.nodes.length > 0 && (
+                        <NavItemGroup
+                          key={node.id}
+                          name={node.label}
+                          navItems={node.childItems.nodes}
+                        ></NavItemGroup>
+                      )
+                    ))
+                )}
+              </FlexList>
+            </nav>
 
-          <div>{cta && <Button to={cta.href}>{cta.text}</Button>}</div>
-        </Flex>
-      </Container>
+            <div>{cta && <Button to={cta.href}>{cta.text}</Button>}</div>
+          </Flex>
+        </Container>
       <Container className={mobileHeaderNavWrapper[isOpen ? "open" : "closed"]}>
         <Space size={1} />
         <Flex variant="spaceBetween">
