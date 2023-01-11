@@ -4,17 +4,13 @@ import * as React from "react"
 import {
   Box,
   ButtonList,
-  Container,
-  Flex,
   Heading,
   HomepageImage,
   HomepageLink,
   Kicker,
-  Section,
-  Subhead,
   Text,
 } from "./ui"
-import { desktopHeroTopLayer, desktopHeroBottomLayer, grid } from "./hero.css"
+import { desktopHeroTopLayer, grid, imageBg } from "./hero.css"
 
 export interface HeroProps {
   image?: HomepageImage
@@ -23,43 +19,44 @@ export interface HeroProps {
   subhead: string
   text: string
   links: HomepageLink[]
+  styles?: string
 }
 
-export default function Hero(props: HeroProps) {
+export default function Hero({
+  image,
+  kicker,
+  h1,
+  subhead,
+  text,
+  links,
+  styles = imageBg.medium,
+}: HeroProps) {
   return (
     <div>
-      {/* <Section paddingY={0}> */}
-      {/* <Container> */}
-      {/* <Flex gap={4} variant="end"> */}
-      {/* <Box width="full"> */}
-      <div className={grid}>
-        {props.image && (
+      <Box background="primary" className={grid}>
+        {image && (
           <GatsbyImage
-            alt={props.image.alt}
-            image={getImage(props.image.gatsbyImageData)}
-            className={desktopHeroBottomLayer}
+            alt={image.alt}
+            image={getImage(image.gatsbyImageData)}
+            className={styles}
           />
         )}
-        <div className={desktopHeroTopLayer}>
-          <div>
+        <Box className={desktopHeroTopLayer}>
+          <Box>
             <Heading as="h1" center>
-              {props.kicker && <Kicker>{props.kicker}</Kicker>}
-              {props.h1}
+              {kicker && <Kicker>{kicker}</Kicker>}
+              {h1}
             </Heading>
 
             {/* <Subhead as="h2">{props.subhead}</Subhead> */}
             <Text as="p" center>
-              {props.text}
+              {text}
             </Text>
 
-            <ButtonList links={props.links} variant={"center"} />
-          </div>
-        </div>
-      </div>
-      {/* </Box> */}
-      {/* </Flex> */}
-      {/* </Container> */}
-      {/* </Section> */}
+            <ButtonList links={links} variant={"center"} />
+          </Box>
+        </Box>
+      </Box>
     </div>
   )
 }
