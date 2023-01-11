@@ -17,7 +17,7 @@ export const navGroupTitle = style([
         alignItems: "baseline",
         color: "inherit",
         fontSize: "inherit",
-        ":hover": { color: theme.colors.active },
+        ":hover": { color: theme.colors.primary },
       },
     },
   },
@@ -38,7 +38,7 @@ const navLinkListWrapperBase = style({
   "@media": {
     [media.medium]: {
       position: "absolute",
-      background: theme.colors.background,
+      background: theme.colors.black,
       padding: `${theme.space[3]} ${theme.space[3]} ${theme.space[0]} ${theme.space[3]}`,
       top: "calc(100% + 20px)",
       left: "50%",
@@ -58,7 +58,7 @@ const navLinkListWrapperBase = style({
           height: 0,
           borderStyle: "solid",
           borderWidth: "0 14px 17.3px 14px",
-          borderColor: `transparent transparent ${theme.colors.background} transparent`,
+          borderColor: `transparent transparent ${theme.colors.black} transparent`,
         },
       },
     },
@@ -124,7 +124,7 @@ export const navLinkListLink = style([
         fontWeight: theme.fontWeights.bold,
         borderRadius: theme.radii.button,
         ":hover": {
-          background: theme.colors.muted,
+          background: theme.colors.primary,
           color: "inherit",
         },
       },
